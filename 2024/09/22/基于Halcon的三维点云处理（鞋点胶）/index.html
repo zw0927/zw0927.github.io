@@ -1,0 +1,1519 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="基于Halcon的三维点云处理（鞋点胶）, Yolo&#39;s blog">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>基于Halcon的三维点云处理（鞋点胶） | Yolo&#39;s blog</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery.min.js"></script>
+
+<meta name="generator" content="Hexo 7.2.0"></head>
+
+
+ 
+
+
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Yolo&#39;s blog</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Yolo&#39;s blog</div>
+        <div class="logo-desc">
+            
+            Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/zw0927/zw0927.github.io" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/zw0927/zw0927.github.io" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://s2.loli.net/2024/09/22/JYIUR5v78w9GQeX.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">基于Halcon的三维点云处理（鞋点胶）</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+	
+	#toc-content {
+    height: calc(100vh - 250px);
+    overflow: scroll;
+}
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/%E6%9C%BA%E5%99%A8%E8%A7%86%E8%A7%89/">
+                                <span class="chip bg-color">机器视觉</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2024-09-22
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2024-09-22
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    4k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    16 分
+                </div>
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.css">
+        
+
+        
+        <!-- 代码块折行 -->
+        <style type="text/css">
+            code[class*="language-"], pre[class*="language-"] { white-space: pre-wrap !important; }
+        </style>
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="基于Halcon的三维点云处理（鞋点胶）"><a href="#基于Halcon的三维点云处理（鞋点胶）" class="headerlink" title="基于Halcon的三维点云处理（鞋点胶）"></a>基于Halcon的三维点云处理（鞋点胶）</h1><h2 id="1-点云介绍"><a href="#1-点云介绍" class="headerlink" title="1.点云介绍"></a>1.点云介绍</h2><p>点云（Point Cloud）是一种用于表示三维空间中大量点的数据结构。每个点通常由其在三维空间中的坐标值（x、y、z）以及可能的其他属性（如颜色、法线、强度等）组成。点云通常用于描述物体的表面几何形状或场景的空间信息。</p>
+<p>点云数据可以通过各种方式获取，包括激光扫描、结构光扫描、摄影测量等技术。处理点云数据通常涉及到点云的采样、滤波、配准、分割、特征提取等操作，以便进行后续的分析和应用。</p>
+<h2 id="2-点云处理"><a href="#2-点云处理" class="headerlink" title="2.点云处理"></a>2.点云处理</h2><p>因为目前我正在学习Halcon三维点云处理，所以我采用的是Halcon中的三维点云处理算子，并没有使用PCL库</p>
+<p>Halcon是一种功能强大的机器视觉库，广泛用于工业视觉系统和机器视觉应用中。Halcon也提供了对点云数据进行处理和分析的功能，可以帮助用户处理三维点云数据并应用于各种视觉任务中。</p>
+<p>Halcon用于点云处理的功能和方法：</p>
+<ol>
+<li><strong>点云的读取和显示</strong>：Halcon提供了读取和显示点云数据的功能，可以从文件中读取点云数据并在视觉界面中显示。</li>
+<li><strong>点云的滤波</strong>：Halcon支持对点云数据进行滤波操作，如高斯滤波、中值滤波等，以去除噪音或平滑点云数据。</li>
+<li><strong>点云的配准</strong>：Halcon可以进行点云的配准操作，将两个或多个点云数据对齐，以便进行后续的比较和分析。</li>
+<li><strong>点云的分割</strong>：Halcon可以对点云数据进行分割操作，将点云分为不同的部分或对象，以便进行单独的分析或处理。</li>
+<li><strong>点云的特征提取</strong>：Halcon支持从点云数据中提取特征，如边缘、表面法向量、曲率等，用于后续的目标识别或建模。</li>
+<li><strong>点云的三维重建</strong>：Halcon可以通过点云数据进行三维重建，生成三维模型或表面网格模型，用于可视化或其他应用。</li>
+</ol>
+<h2 id="3-Halcon中点云处理的主要算子"><a href="#3-Halcon中点云处理的主要算子" class="headerlink" title="3.Halcon中点云处理的主要算子"></a>3.Halcon中点云处理的主要算子</h2><h3 id="3-1-点云的读取算子"><a href="#3-1-点云的读取算子" class="headerlink" title="3.1 点云的读取算子"></a>3.1 点云的读取算子</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">*读取点云文件</span><br><span class="line"><span class="built_in">read_object_model_3d</span>( : : FileName, Scale, GenParamName, GenParamValue : ObjectModel3D, Status)</span><br><span class="line"></span><br><span class="line">*参数</span><br><span class="line"><span class="built_in">FileName</span> (输入控制)：要读取的文件的文件名。</span><br><span class="line">数据类型：字符串</span><br><span class="line">文件扩展名：.off, .ply, .dxf, .om3, .obj, .<span class="function">stl</span></span><br><span class="line"><span class="function">    </span></span><br><span class="line"><span class="function"><span class="title">Scale</span> <span class="params">(输入控制)</span>：文件中数据的比例尺。</span></span><br><span class="line"><span class="function">数据类型：字符串/实数/整数</span></span><br><span class="line"><span class="function">默认值：&#x27;m&#x27;</span></span><br><span class="line"><span class="function">建议取值：&#x27;m&#x27;, &#x27;cm&#x27;, &#x27;mm&#x27;, &#x27;microns&#x27;, &#x27;µm&#x27;, &#x27;nm&#x27;, &#x27;km&#x27;, &#x27;in&#x27;, &#x27;ft&#x27;, &#x27;yd&#x27;, 1.0, 0.01, 0.001, 1.0e-6, 0.0254, 0.3048, 0.9144</span></span><br><span class="line"><span class="function">    </span></span><br><span class="line"><span class="function"><span class="title">GenParamName</span> <span class="params">(输入控制)</span>：通用参数的名称。</span></span><br><span class="line"><span class="function">数据类型：字符串数组</span></span><br><span class="line"><span class="function">默认值：[]</span></span><br><span class="line"><span class="function">可选值：&#x27;convert_to_triangles&#x27;, &#x27;file_type&#x27;, &#x27;invert_normals&#x27;, &#x27;max_approx_error&#x27;, &#x27;min_num_points&#x27;, &#x27;xyz_map_height&#x27;, &#x27;xyz_map_width&#x27;</span></span><br><span class="line"><span class="function"><span class="title">GenParamValue</span> <span class="params">(输入控制)</span>：通用参数的值。</span></span><br><span class="line"><span class="function">数据类型：字符串/实数/整数</span></span><br><span class="line"><span class="function">默认值：[]</span></span><br><span class="line"><span class="function">建议取值：&#x27;<span class="literal">true</span>&#x27;, &#x27;<span class="literal">false</span>&#x27;, 1, 0, &#x27;om3&#x27;, &#x27;off&#x27;, &#x27;ply&#x27;, &#x27;dxf&#x27;, &#x27;obj&#x27;, &#x27;stl&#x27;, &#x27;stl_binary&#x27;, &#x27;stl_ascii&#x27;</span></span><br><span class="line"><span class="function">--------------------------------</span></span><br><span class="line"><span class="function">convert_to_triangles：指定是否将对象转换为三角形。可能的取值为 &#x27;<span class="literal">true</span>&#x27;（转换为三角形）或 &#x27;<span class="literal">false</span>&#x27;（不转换为三角形）。</span></span><br><span class="line"><span class="function">file_type：文件类型。可能的取值包括 &#x27;om3&#x27;, &#x27;off&#x27;, &#x27;ply&#x27;, &#x27;dxf&#x27;, &#x27;obj&#x27;, &#x27;stl&#x27;, &#x27;stl_binary&#x27;, &#x27;stl_ascii&#x27;，分别表示不同类型的3D文件格式。</span></span><br><span class="line"><span class="function">invert_normals：指定是否反转法线。可能的取值为 &#x27;<span class="literal">true</span>&#x27;（反转法线）或 &#x27;<span class="literal">false</span>&#x27;（不反转法线）。</span></span><br><span class="line"><span class="function">max_approx_error：最大近似误差。可以是实数，用于指定在读取对象模型时允许的最大近似误差。</span></span><br><span class="line"><span class="function">min_num_points：最小点数。可以是整数，用于指定对象模型中允许的最小点数。</span></span><br><span class="line"><span class="function">xyz_map_height：XYZ映射高度。可以是字符串/实数/整数，用于指定XYZ映射的高度值。</span></span><br><span class="line"><span class="function">xyz_map_width：XYZ映射宽度。可以是字符串/实数/整数，用于指定XYZ映射的宽度值。    </span></span><br><span class="line"><span class="function">--------------------------------</span></span><br><span class="line"><span class="function">    </span></span><br><span class="line"><span class="function"><span class="title">ObjectModel3D</span> <span class="params">(输出控制)</span>：3D对象模型的句柄。</span></span><br><span class="line"><span class="function">数据类型：整数</span></span><br><span class="line"><span class="function">    </span></span><br><span class="line"><span class="function"><span class="title">Status</span> <span class="params">(输出控制)</span>：状态信息。</span></span><br><span class="line"><span class="function">数据类型：字符串数组</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="3-2-点云的显示"><a href="#3-2-点云的显示" class="headerlink" title="3.2 点云的显示"></a>3.2 点云的显示</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">*点云的显示</span><br><span class="line"><span class="built_in">visualize_object_model_3d</span>( : : WindowHandle, ObjectModel3D, CamParam, PoseIn, GenParamName, GenParamValue, Title, Label, Information : PoseOut)</span><br><span class="line"></span><br><span class="line">*参数</span><br><span class="line"><span class="built_in">WindowHandle</span> (输入控制)：窗口标识符。</span><br><span class="line">数据类型：整数</span><br><span class="line"><span class="built_in">ObjectModel3D</span> (输入控制)：<span class="number">3</span>D对象模型的句柄。</span><br><span class="line">数据类型：整数数组</span><br><span class="line"><span class="built_in">CamParam</span> (输入控制)：场景的相机参数。</span><br><span class="line">数据类型：实数数组</span><br><span class="line">默认值：[]</span><br><span class="line"><span class="built_in">PoseIn</span> (输入控制)：对象的<span class="number">3</span>D姿势。</span><br><span class="line">数据类型：实数/整数数组</span><br><span class="line">默认值：[]</span><br><span class="line"><span class="built_in">GenParamName</span> (输入控制)：通用参数的名称。可以传递所有disp_object_model_3d的通用参数。</span><br><span class="line">数据类型：字符串数组</span><br><span class="line">默认值：[]</span><br><span class="line">建议值：<span class="string">&#x27;alpha&#x27;</span>, <span class="string">&#x27;attribute&#x27;</span>, <span class="string">&#x27;color&#x27;</span>, <span class="string">&#x27;colored&#x27;</span>, <span class="string">&#x27;disp_lines&#x27;</span>, <span class="string">&#x27;disp_normals&#x27;</span>, <span class="string">&#x27;disp_pose&#x27;</span>, <span class="string">&#x27;light_position&#x27;</span>, <span class="string">&#x27;light_ambient&#x27;</span>, <span class="string">&#x27;light_diffuse&#x27;</span>, <span class="string">&#x27;line_color&#x27;</span>, <span class="string">&#x27;line_width&#x27;</span>, <span class="string">&#x27;normal_color&#x27;</span>, <span class="string">&#x27;point_size&#x27;</span>, <span class="string">&#x27;intensity&#x27;</span>, <span class="string">&#x27;intensity_red&#x27;</span>, <span class="string">&#x27;intensity_green&#x27;</span>, <span class="string">&#x27;intensity_blue&#x27;</span>, <span class="string">&#x27;lut&#x27;</span>, <span class="string">&#x27;disp_background&#x27;</span>, <span class="string">&#x27;inspection_mode&#x27;</span></span><br><span class="line"><span class="built_in">GenParamValue</span> (输入控制)：通用参数的值。可以传递所有disp_object_model_3d的通用参数。</span><br><span class="line">数据类型：任意类型数组</span><br><span class="line">默认值：[]</span><br><span class="line">建议值：<span class="string">&#x27;true&#x27;</span>, <span class="string">&#x27;false&#x27;</span>, <span class="string">&#x27;coord_x&#x27;</span>, <span class="string">&#x27;coord_y&#x27;</span>, <span class="string">&#x27;coord_z&#x27;</span>, <span class="string">&#x27;red&#x27;</span>, <span class="string">&#x27;green&#x27;</span>, <span class="string">&#x27;blue&#x27;</span>, <span class="string">&#x27;auto&#x27;</span>, <span class="string">&#x27;faces&#x27;</span>, <span class="string">&#x27;primitive&#x27;</span>, <span class="string">&#x27;points&#x27;</span>, <span class="string">&#x27;lines&#x27;</span>, <span class="string">&#x27;normal_x&#x27;</span>, <span class="string">&#x27;normal_y, &#x27;</span>normal_z<span class="number">&#x27;</span>, <span class="string">&#x27;standard&#x27;</span>, <span class="string">&#x27;surface&#x27;</span></span><br><span class="line">--------------------------------------------</span><br><span class="line">attribute：明确选择对象模型可视化的方式，可以是自动选择、面、基元、点或线。默认为自动选择。</span><br><span class="line">color：对象的颜色，可以是预设颜色（使用query_color操作符查询）或以<span class="meta">#rrggbb形式指定的RGB三元组。默认为白色。</span></span><br><span class="line">alpha：对象的透明度，取值范围为<span class="number">0.0</span>（完全透明）到<span class="number">1.0</span>（完全不透明）。默认为<span class="number">1.0</span>。</span><br><span class="line">disp_lines：是否显示对象多边形的轮廓。默认为<span class="literal">false</span>。</span><br><span class="line">disp_normals：是否显示<span class="number">3</span>D对象模型的表面法线。默认为<span class="literal">false</span>。</span><br><span class="line">line_color：当disp_lines设置为<span class="literal">true</span>时，线的颜色。默认为color的值。</span><br><span class="line">line_width：线的宽度（以像素为单位）。默认为<span class="number">1.0</span>。</span><br><span class="line">normal_color：当disp_normals设置为<span class="literal">true</span>时，可视化法线的颜色。默认为color的值。</span><br><span class="line">intensity, intensity_red, intensity_green, intensity_blue：描述显示点或面强度的属性。默认为none。</span><br><span class="line">lut：将强度转换为颜色的查找表（LUT）。默认为<span class="keyword">default</span>。</span><br><span class="line">point_size：点的直径（以像素为单位）。默认为<span class="number">3.5</span>。</span><br><span class="line">inspection_mode：影响交互式修改姿势的方式，可选standard或surface。默认为standard。</span><br><span class="line">--------------------------------------------</span><br><span class="line"><span class="built_in">Title</span> (输入控制)：要显示在输出图形窗口左上角的文本。</span><br><span class="line">数据类型：字符串数组</span><br><span class="line">默认值：[]</span><br><span class="line"><span class="built_in">Label</span> (输入控制)：要显示在每个显示对象模型位置的文本。</span><br><span class="line">数据类型：字符串数组</span><br><span class="line">默认值：[]</span><br><span class="line"><span class="built_in">Information</span> (输入控制)：要显示在输出图形窗口左下角的文本。</span><br><span class="line">数据类型：字符串数组</span><br><span class="line">默认值：[]</span><br><span class="line"><span class="built_in">PoseOut</span> (输出控制)：所有可能由用户交互更改的对象模型的姿势。</span><br><span class="line">数据类型：姿势数组</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2024/09/22/%E5%9F%BA%E4%BA%8EHalcon%E7%9A%84%E4%B8%89%E7%BB%B4%E7%82%B9%E4%BA%91%E5%A4%84%E7%90%86%EF%BC%88%E9%9E%8B%E7%82%B9%E8%83%B6%EF%BC%89/image-20240922134956742.png" alt="image-20240922134956742"></p>
+<h3 id="3-3-求点云表面法向量"><a href="#3-3-求点云表面法向量" class="headerlink" title="3.3 求点云表面法向量"></a>3.3 求点云表面法向量</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">*用于计算<span class="number">3</span>D对象模型的表面法线。</span><br><span class="line"><span class="built_in">surface_normals_object_model_3d</span>( : : ObjectModel3D, Method, GenParamName, GenParamValue : ObjectModel3DNormals)</span><br><span class="line"></span><br><span class="line">*参数</span><br><span class="line">ObjectModel3D：输入参数，包含<span class="number">3</span>D点数据的<span class="number">3</span>D对象模型的句柄。</span><br><span class="line">Method：输入参数，法线计算方法。目前仅支持<span class="function">Moving Least <span class="title">Squares</span> <span class="params">(MLS，方法为<span class="string">&#x27;mls&#x27;</span>)</span> 法线估计方法。</span></span><br><span class="line"><span class="function">GenParamName：输入参数，通用平滑参数的名称列表。包括&#x27;mls_abs_sigma&#x27;, &#x27;mls_force_inwards&#x27;, &#x27;mls_kNN&#x27;, &#x27;mls_order&#x27;, &#x27;mls_relative_sigma&#x27;等。</span></span><br><span class="line"><span class="function">GenParamValue：输入参数，通用平滑参数的值列表。可以根据具体需求设置各个参数的值。</span></span><br><span class="line"><span class="function">ObjectModel3DNormals：输出参数，包含计算出的3D法线的3D对象模型句柄。</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="3-3-三维重建"><a href="#3-3-三维重建" class="headerlink" title="3.3 三维重建"></a>3.3 三维重建</h3><p>将离散的点重建成一个聚合的面</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">*用于为<span class="number">3</span>D对象模型创建表面三角化（三角网格重建）</span><br><span class="line"><span class="built_in">triangulate_object_model_3d</span>( : : ObjectModel3D, Method, GenParamName, GenParamValue : TriangulatedObjectModel3D, Information)</span><br><span class="line">-------------------------------------------</span><br><span class="line"><span class="built_in">ObjectModel3D</span> (输入参数)：包含<span class="number">3</span>D点数据的<span class="number">3</span>D对象模型的句柄。</span><br><span class="line"><span class="built_in">Method</span> (输入参数)：三角化方法。可选值有<span class="string">&#x27;greedy&#x27;</span>、<span class="string">&#x27;implicit&#x27;</span>和<span class="string">&#x27;polygon_triangulation&#x27;</span>。默认值为<span class="string">&#x27;greedy&#x27;</span>。其中：</span><br><span class="line"><span class="string">&#x27;polygon_triangulation&#x27;</span>：是将多边形转换为三角形面表示的简单方法。</span><br><span class="line"><span class="string">&#x27;greedy&#x27;</span> 和 <span class="string">&#x27;implicit&#x27;</span>：这两种方法是用于从未知表面拓扑的纯<span class="number">3</span>D点数据计算三角形面的复杂算法。</span><br><span class="line"><span class="built_in">GenParamName</span> (输入参数)：通用三角化参数的名称列表。例如，<span class="string">&#x27;greedy_fix_flips&#x27;</span>, <span class="string">&#x27;greedy_hole_filling&#x27;</span>等。默认为空列表。</span><br><span class="line"><span class="built_in">GenParamValue</span> (输入参数)：通用三角化参数的值列表。例如，<span class="number">6</span>, <span class="number">8</span>, <span class="string">&#x27;true&#x27;</span>, <span class="string">&#x27;false&#x27;</span>等。默认为空列表。</span><br><span class="line"><span class="built_in">TriangulatedObjectModel3D</span> (输出参数)：包含三角化表面的<span class="number">3</span>D对象模型句柄。</span><br><span class="line"><span class="built_in">Information</span> (输出参数)：关于三角化过程的附加信息，以数字或字符串形式返回</span><br><span class="line">-------------------------------------------</span><br></pre></td></tr></table></figure>
+
+<p><strong>重建前：</strong></p>
+<p><img src="/2024/09/22/%E5%9F%BA%E4%BA%8EHalcon%E7%9A%84%E4%B8%89%E7%BB%B4%E7%82%B9%E4%BA%91%E5%A4%84%E7%90%86%EF%BC%88%E9%9E%8B%E7%82%B9%E8%83%B6%EF%BC%89/image-20240922135412985.png" alt="image-20240922135412985"></p>
+<p><strong>重建后：</strong></p>
+<p><img src="/2024/09/22/%E5%9F%BA%E4%BA%8EHalcon%E7%9A%84%E4%B8%89%E7%BB%B4%E7%82%B9%E4%BA%91%E5%A4%84%E7%90%86%EF%BC%88%E9%9E%8B%E7%82%B9%E8%83%B6%EF%BC%89/image-20240922135817408.png" alt="image-20240922135817408"></p>
+<h3 id="3-4-点云的筛选"><a href="#3-4-点云的筛选" class="headerlink" title="3.4 点云的筛选"></a>3.4 点云的筛选</h3><p>筛选掉点云中的无关杂质（不感兴趣的位置）</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">*筛选孤立散点特征的算子</span><br><span class="line"><span class="built_in">select_points_object_model_3d</span>( : : ObjectModel3D, Attrib, MinValue, MaxValue : ObjectModel3DThresholded)</span><br><span class="line">*参数</span><br><span class="line"><span class="built_in">ObjectModel3D</span> (输入参数)：<span class="number">3</span>D对象模型的句柄数组，即要应用阈值处理的对象模型集合。</span><br><span class="line"><span class="built_in">Attrib</span> (输入参数)：要应用阈值处理的属性名称。默认值为<span class="string">&#x27;point_coord_z&#x27;</span>，可选的属性包括：</span><br><span class="line">    <span class="string">&#x27;mapping_col&#x27;</span>: 映射列</span><br><span class="line">    <span class="string">&#x27;mapping_row&#x27;</span>: 映射行</span><br><span class="line">    <span class="string">&#x27;point_coord_x&#x27;</span>: 点的X坐标</span><br><span class="line">    <span class="string">&#x27;point_coord_y&#x27;</span>: 点的Y坐标</span><br><span class="line">    <span class="string">&#x27;point_coord_z&#x27;</span>: 点的Z坐标</span><br><span class="line">    <span class="string">&#x27;point_normal_x&#x27;</span>: 点的法线向量X分量</span><br><span class="line">    <span class="string">&#x27;point_normal_y&#x27;</span>: 点的法线向量Y分量</span><br><span class="line">    <span class="string">&#x27;point_normal_z&#x27;</span>: 点的法线向量Z分量</span><br><span class="line"><span class="built_in">MinValue</span> (输入参数)：指定属性的最小阈值。默认值为<span class="number">0.5</span>。</span><br><span class="line"><span class="built_in">MaxValue</span> (输入参数)：指定属性的最大阈值。默认值为<span class="number">1.0</span>。</span><br><span class="line"><span class="built_in">ObjectModel3DThresholded</span> (输出参数)：经过阈值处理后的<span class="number">3</span>D对象模型的句柄数组。这些句柄指向经过属性阈值处理后的减少的<span class="number">3</span>D对象模型。</span><br></pre></td></tr></table></figure>
+
+<p><strong>筛选前：</strong></p>
+<p><img src="/2024/09/22/%E5%9F%BA%E4%BA%8EHalcon%E7%9A%84%E4%B8%89%E7%BB%B4%E7%82%B9%E4%BA%91%E5%A4%84%E7%90%86%EF%BC%88%E9%9E%8B%E7%82%B9%E8%83%B6%EF%BC%89/image-20240922135922762.png" alt="image-20240922135922762"></p>
+<p><strong>筛选后：</strong></p>
+<p><img src="/2024/09/22/%E5%9F%BA%E4%BA%8EHalcon%E7%9A%84%E4%B8%89%E7%BB%B4%E7%82%B9%E4%BA%91%E5%A4%84%E7%90%86%EF%BC%88%E9%9E%8B%E7%82%B9%E8%83%B6%EF%BC%89/image-20240922135940477.png" alt="image-20240922135940477"></p>
+<h3 id="3-5连通域断开处理"><a href="#3-5连通域断开处理" class="headerlink" title="3.5连通域断开处理"></a>3.5连通域断开处理</h3><p>只有进行断开操作之后 才可以继续进行筛选操作</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">connection_object_model_3d</span>( : : ObjectModel3D, Feature, Value : ObjectModel3DConnected)</span><br><span class="line">*参数</span><br><span class="line"><span class="built_in">ObjectModel3D</span> (输入参数)：<span class="number">3</span>D对象模型的句柄数组，即要处理的<span class="number">3</span>D对象模型。</span><br><span class="line"><span class="built_in">Feature</span> (输入参数)：用于计算连通组件的属性。默认值为<span class="string">&#x27;distance_3d&#x27;</span>，可选的属性包括：</span><br><span class="line">    <span class="string">&#x27;angle&#x27;</span>: 角度</span><br><span class="line">    <span class="string">&#x27;distance_3d&#x27;</span>: <span class="number">3</span>D距离</span><br><span class="line">    <span class="string">&#x27;distance_mapping&#x27;</span>: 距离映射</span><br><span class="line">    <span class="string">&#x27;lines&#x27;</span>: 线</span><br><span class="line">    <span class="string">&#x27;mesh&#x27;</span>: 网格</span><br><span class="line"><span class="built_in">Value</span> (输入参数)：两个连通组件之间的最大距离值。默认值为<span class="number">1.0</span>。可选的值包括<span class="number">1.0</span>, <span class="number">1.1</span>, <span class="number">1.5</span>, <span class="number">10.0</span>, <span class="number">100.0</span>等。</span><br><span class="line"><span class="built_in">ObjectModel3DConnected</span> (输出参数)：代表连通组件的<span class="number">3</span>D对象模型的句柄数组。这些句柄指向表示连接的部分的<span class="number">3</span>D对象模型。</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="3-6-求点云的最下外界Box"><a href="#3-6-求点云的最下外界Box" class="headerlink" title="3.6 求点云的最下外界Box"></a>3.6 求点云的最下外界Box</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">smallest_bounding_box_object_model_3d</span>( : : ObjectModel3D, Type : Pose, Length1, Length2, Length3)</span><br><span class="line">    </span><br><span class="line">*各参数的解释：</span><br><span class="line"><span class="built_in">ObjectModel3D</span> (输入参数)：<span class="number">3</span>D对象模型的句柄。用于指定要计算最小边界框的<span class="number">3</span>D对象模型。</span><br><span class="line"><span class="built_in">Type</span> (输入参数)：用于估计最小边界框的方法。可以选择<span class="string">&#x27;axis_aligned&#x27;</span>（轴对齐）或<span class="string">&#x27;oriented&#x27;</span>（定向）。<span class="string">&#x27;oriented&#x27;</span>的算法在计算上要昂贵得多，它返回的是定向边界框的近似值。请注意，定向边界框的算法是随机的，每次调用可能返回不同的边界框。</span><br><span class="line"><span class="built_in">Pose</span> (输出参数)：描述生成的边界框的姿势，包括位置和方向。姿势的原点位于边界框的中心，x轴与边界框的最长边对齐。</span><br><span class="line"><span class="built_in">Length1</span> (输出参数)：边界框最长边的长度。</span><br><span class="line"><span class="built_in">Length2</span> (输出参数)：边界框第二长边的长度。</span><br><span class="line"><span class="built_in">Length3</span> (输出参数)：边界框第三长边的长度。</span><br></pre></td></tr></table></figure>
+
+<p>如下图，灰色部分即为最小的外界box，这个外界box是为了便于确认点云的Pose和坐标</p>
+<p><img src="/2024/09/22/%E5%9F%BA%E4%BA%8EHalcon%E7%9A%84%E4%B8%89%E7%BB%B4%E7%82%B9%E4%BA%91%E5%A4%84%E7%90%86%EF%BC%88%E9%9E%8B%E7%82%B9%E8%83%B6%EF%BC%89/image-20240922140238356.png" alt="image-20240922140238356"></p>
+<h3 id="3-7-求物体的外边界"><a href="#3-7-求物体的外边界" class="headerlink" title="3.7 求物体的外边界"></a>3.7 求物体的外边界</h3><p>我采用的是一个简单粗暴的方法—做切平面</p>
+<p>我做了一个竖直的切平面，不断沿着x轴进行移动，求出竖直的切平面与物体之间的交集，然后映射到二维平面，求出XLD线段，这样就可以得到交集线段的起点和终点坐标，这样就可以得到物体的边界</p>
+<p>这个方法可以参考例程 <code>inspect_3d_surface_intersections.hdev</code></p>
+<p><img src="/2024/09/22/%E5%9F%BA%E4%BA%8EHalcon%E7%9A%84%E4%B8%89%E7%BB%B4%E7%82%B9%E4%BA%91%E5%A4%84%E7%90%86%EF%BC%88%E9%9E%8B%E7%82%B9%E8%83%B6%EF%BC%89/image-20240915171921441.png" alt="image-20240915171921441"></p>
+<h2 id="4-Halcon源代码"><a href="#4-Halcon源代码" class="headerlink" title="4.Halcon源代码"></a>4.Halcon源代码</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br></pre></td><td class="code"><pre><span class="line">*读取点云数据</span><br><span class="line">path:=&#x27;./2020-01-14-16832.om3&#x27;</span><br><span class="line">read_object_model_3d (path, &#x27;m&#x27;, [], [], ObjectModel3D, Status)</span><br><span class="line"></span><br><span class="line">*显示点云数据</span><br><span class="line">dev_open_window (0, 0, 512, 512, &#x27;black&#x27;, WindowHandle)</span><br><span class="line">visualize_object_model_3d (WindowHandle, ObjectModel3D, [], [], [&#x27;lut&#x27;,&#x27;intensity&#x27;,&#x27;disp_pose&#x27;], [&#x27;color1&#x27;,&#x27;coord_z&#x27;,&#x27;true&#x27;], [], [], [], PoseOut)</span><br><span class="line"></span><br><span class="line">*筛选去除噪声(通过点云之间的距离进行断开)</span><br><span class="line">connection_object_model_3d (ObjectModel3D, &#x27;distance_3d&#x27;, 1, ObjectModel3DConnected)</span><br><span class="line">get_object_model_3d_params (ObjectModel3DConnected, &#x27;num_points&#x27;, ParamValue)</span><br><span class="line">select_object_model_3d (ObjectModel3DConnected, &#x27;num_points&#x27;, &#x27;and&#x27;, 20000, 2e7, ObjectModel3DSelected)</span><br><span class="line">visualize_object_model_3d (WindowHandle, ObjectModel3DSelected, [], [], [&#x27;lut&#x27;,&#x27;intensity&#x27;,&#x27;disp_pose&#x27;], [&#x27;color1&#x27;,&#x27;coord_z&#x27;,&#x27;true&#x27;], [], [], [], PoseOut)</span><br><span class="line"></span><br><span class="line">*将鞋点云变换到原始坐标系上主轴-x y z</span><br><span class="line">moments_object_model_3d (ObjectModel3DSelected, &#x27;principal_axes&#x27;, Moments)</span><br><span class="line">*将pose进行翻转</span><br><span class="line">pose_invert (Moments, PoseInvert)</span><br><span class="line">*点云模型刚体变换模型</span><br><span class="line">rigid_trans_object_model_3d (ObjectModel3DSelected, PoseInvert, ObjectModel3DRigidTrans)</span><br><span class="line">visualize_object_model_3d (WindowHandle, ObjectModel3DRigidTrans, [], [], [&#x27;lut&#x27;,&#x27;intensity&#x27;,&#x27;disp_pose&#x27;], [&#x27;color1&#x27;,&#x27;coord_z&#x27;,&#x27;true&#x27;], [], [], [], PoseOut)</span><br><span class="line"></span><br><span class="line">*三角曲面重建</span><br><span class="line">triangulate_object_model_3d (ObjectModel3DRigidTrans, &#x27;greedy&#x27;, [], [], TriangulatedObjectModel3D, Information)</span><br><span class="line">*visualize_object_model_3d (WindowHandle, TriangulatedObjectModel3D, [], [], [&#x27;lut&#x27;,&#x27;intensity&#x27;,&#x27;disp_pose&#x27;], [&#x27;color1&#x27;,&#x27;coord_z&#x27;,&#x27;true&#x27;], [], [], [], PoseOut)</span><br><span class="line"></span><br><span class="line">stop()</span><br><span class="line"></span><br><span class="line">*这一步是为了更好的将物体移动到主轴的位置（继续转正）-</span><br><span class="line">*求出物体的外接box</span><br><span class="line">smallest_bounding_box_object_model_3d (TriangulatedObjectModel3D, &#x27;oriented&#x27;, Pose, Length1, Length2, Length3)</span><br><span class="line">*翻转姿态</span><br><span class="line">pose_invert (Pose, PoseInvert1)</span><br><span class="line">*刚体变换</span><br><span class="line">rigid_trans_object_model_3d (TriangulatedObjectModel3D, PoseInvert1, ObjectModel3DRigidTrans1)</span><br><span class="line">*visualize_object_model_3d (WindowHandle, ObjectModel3DRigidTrans1, [], [], [&#x27;lut&#x27;,&#x27;intensity&#x27;,&#x27;disp_pose&#x27;], [&#x27;color1&#x27;,&#x27;coord_z&#x27;,&#x27;true&#x27;], [], [], [], PoseOut)</span><br><span class="line"></span><br><span class="line">*生成物体的外接box</span><br><span class="line">smallest_bounding_box_object_model_3d (ObjectModel3DRigidTrans1, &#x27;oriented&#x27;, PoseBox, Length11, Length21, Length31)</span><br><span class="line">gen_box_object_model_3d (PoseBox, Length11, Length21, Length31, ObjectModel3D1)</span><br><span class="line"></span><br><span class="line">*将物体和box一起显示(显示的时候 加&#x27;_0&#x27;代表第一个Object 加&#x27;_1&#x27;代表第二个Object)</span><br><span class="line">visualize_object_model_3d (WindowHandle, [ObjectModel3DRigidTrans1,ObjectModel3D1], [], [], [&#x27;color_0&#x27;,&#x27;color_1&#x27;,&#x27;alpha_1&#x27;,&#x27;disp_pose&#x27;], [&#x27;green&#x27;,&#x27;gray&#x27;,0.5,&#x27;true&#x27;], [], [], [], PoseOut)</span><br><span class="line">objectsOut:=[]</span><br><span class="line">Index_S:=[]</span><br><span class="line">Index_E:=[]</span><br><span class="line">color_S:=[]</span><br><span class="line">color_E:=[]</span><br><span class="line">colorsOut:=[]</span><br><span class="line">colorvaluesOut:=[]</span><br><span class="line">all_x:=[]</span><br><span class="line">all_y:=[]</span><br><span class="line">*做切平面与鞋子的点云相交</span><br><span class="line">for index:=0 to 45 by 1</span><br><span class="line">    cutplanePose := PoseBox</span><br><span class="line">    cutplanePose[0]:=PoseBox[0] - Length11/2 + (index)*4+3</span><br><span class="line">    cutplanePose[3]:=0</span><br><span class="line">    cutplanePose[4]:=90</span><br><span class="line">    cutplanePose[5]:=0</span><br><span class="line">    *产生平面</span><br><span class="line">    gen_plane_object_model_3d (cutplanePose, [-1,-1,1,1]* 90,  [-1,1,1,-1] * 90, GenPlane)</span><br><span class="line">    *visualize_object_model_3d (WindowHandle, [ObjectModel3DRigidTrans1,GenPlane], [], [], [&#x27;color_0&#x27;,&#x27;color_1&#x27;,&#x27;alpha_1&#x27;,&#x27;disp_pose&#x27;], [&#x27;green&#x27;,&#x27;gray&#x27;,0.5,&#x27;true&#x27;], [], [], [], PoseOut)</span><br><span class="line">    </span><br><span class="line">    *求交线</span><br><span class="line">    intersect_plane_object_model_3d (ObjectModel3DRigidTrans1, cutplanePose, ObjectModel3DIntersection)</span><br><span class="line">    *visualize_object_model_3d (WindowHandle, ObjectModel3DIntersection, [], [], [&#x27;lut&#x27;,&#x27;intensity&#x27;,&#x27;disp_pose&#x27;], [&#x27;color1&#x27;,&#x27;coord_z&#x27;,&#x27;true&#x27;], [], [], [], PoseOut)</span><br><span class="line">    </span><br><span class="line">    *变换到二维xld</span><br><span class="line">    *翻转姿态</span><br><span class="line">    pose_invert (cutplanePose, poseInvert)</span><br><span class="line">    *确认投影平面在前面</span><br><span class="line">    *获得box外接主轴的直径</span><br><span class="line">    get_object_model_3d_params (ObjectModel3DIntersection, &#x27;diameter_axis_aligned_bounding_box&#x27;, Diameter)</span><br><span class="line">    poseInvert[2]:=poseInvert[2]+Diameter</span><br><span class="line">    *用平行于投影平面的相机（1:1的比例）</span><br><span class="line">    Scale:=1</span><br><span class="line">    CamParam := [0,0,1.0/Scale, 1.0/Scale, 0, 0, 500,500]</span><br><span class="line">    project_object_model_3d (ModelContours, ObjectModel3DIntersection, CamParam, poseInvert, &#x27;data&#x27;, &#x27;lines&#x27;)</span><br><span class="line">    count_obj(ModelContours,Number)</span><br><span class="line">    </span><br><span class="line">       Rows:=[]</span><br><span class="line">   Columns:=[]</span><br><span class="line">   Row:=[]</span><br><span class="line">   Column:=[]</span><br><span class="line">   for I:=1 to  Number  by 1</span><br><span class="line">     select_obj (ModelContours, EdgeContour, I)</span><br><span class="line">     get_contour_xld(EdgeContour, Row,Column)</span><br><span class="line">     Rows:=[Rows,Row]</span><br><span class="line">     Columns:=[Columns,Column]</span><br><span class="line">   endfor</span><br><span class="line">   *从上到下依次进行排序</span><br><span class="line">   tuple_sort_index (Rows, Indices)</span><br><span class="line">   tuple_length(Rows,Length)</span><br><span class="line">   OrderRow:=[]</span><br><span class="line">   OrderColumn:=[]</span><br><span class="line">   if(Length&gt;=1)</span><br><span class="line">   for Row_Index:=0 to Length-1  by 1</span><br><span class="line">      OrderRow:=[OrderRow,Rows[Indices[Row_Index]]]</span><br><span class="line">      OrderColumn:=[OrderColumn,Columns[[Row_Index]]]</span><br><span class="line">   endfor</span><br><span class="line">   endif</span><br><span class="line">   </span><br><span class="line">   *求最大和最小点（行方向）</span><br><span class="line">   tuple_sort_index (OrderRow, Indices)</span><br><span class="line">   tuple_length(OrderRow,Length)</span><br><span class="line">   *起点（xld）</span><br><span class="line">   StartRow:=OrderRow[Indices[0]]</span><br><span class="line">   StartColumn:=OrderColumn[Indices[0]]</span><br><span class="line">   *终点（xld）</span><br><span class="line">   EndRow:=OrderRow[Indices[Length-1]]</span><br><span class="line">   EndColumn:=OrderColumn[Indices[Length-1]]</span><br><span class="line">  </span><br><span class="line">   *在起点和终点位置生成 x 图标</span><br><span class="line">  gen_cross_contour_xld(StartXP, StartRow, StartColumn, 6, 0.795296)</span><br><span class="line">  gen_cross_contour_xld(EndXP, EndRow,EndColumn, 6, 0.795296)</span><br><span class="line">  dev_display(ModelContours)</span><br><span class="line">  </span><br><span class="line">  *转换成点云坐标</span><br><span class="line">  StartPose:=[cutplanePose[0],StartRow,-StartColumn, 0,0,0,0]</span><br><span class="line">  EndPose  :=[cutplanePose[0],EndRow,-EndColumn, 0,0,0,0]</span><br><span class="line">  </span><br><span class="line">  *生成球体的点云</span><br><span class="line">  gen_sphere_object_model_3d (StartPose, 2, StartPoint)</span><br><span class="line">  gen_sphere_object_model_3d (EndPose  , 2, EndPoint  )  </span><br><span class="line">  </span><br><span class="line">    *所有对点的边界点集合</span><br><span class="line">  objectsOut := [objectsOut,StartPoint]</span><br><span class="line">  objectsOut := [objectsOut,EndPoint  ] </span><br><span class="line">  *显示时的颜色</span><br><span class="line">  Index_S:= 0+index*2</span><br><span class="line">  Index_E:= 0+index*2+1</span><br><span class="line">  color_S:=&#x27;color_&#x27;+Index_S</span><br><span class="line">  color_E:=&#x27;color_&#x27;+Index_E</span><br><span class="line">  </span><br><span class="line">  colorsOut := [colorsOut,color_S]</span><br><span class="line">  colorsOut := [colorsOut,color_E]</span><br><span class="line">  </span><br><span class="line">  colorvaluesOut := [colorvaluesOut,&#x27;blue&#x27;]</span><br><span class="line">  colorvaluesOut := [colorvaluesOut,&#x27;blue&#x27;]</span><br><span class="line">  </span><br><span class="line">  </span><br><span class="line">  all_x:=[all_x,cutplanePose[0]]</span><br><span class="line">  all_y:=[all_y,StartRow]</span><br><span class="line">  </span><br><span class="line">  all_x:=[all_x,cutplanePose[0]]</span><br><span class="line">  all_y:=[all_y,EndRow]</span><br><span class="line">endfor</span><br><span class="line"></span><br><span class="line">*显示外边界模型点云</span><br><span class="line"> visualize_object_model_3d (WindowHandle,[objectsOut,ObjectModel3DRigidTrans1], [],[],[colorsOut,&#x27;color_88&#x27;],[colorvaluesOut,&#x27;red&#x27;], [], &#x27;&#x27;, [], Pose)</span><br><span class="line">*2二维显示</span><br><span class="line"> dev_open_window (0, 0, 512, 512, &#x27;black&#x27;, WindowHandle1)</span><br><span class="line"> dev_set_color(&#x27;red&#x27;)</span><br><span class="line"> gen_cross_contour_xld(Start,all_x,all_y, 3, 0.885398)</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">Yolo</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://homeryland.cn/2024/09/22/%E5%9F%BA%E4%BA%8EHalcon%E7%9A%84%E4%B8%89%E7%BB%B4%E7%82%B9%E4%BA%91%E5%A4%84%E7%90%86%EF%BC%88%E9%9E%8B%E7%82%B9%E8%83%B6%EF%BC%89/">https://homeryland.cn/2024/09/22/%E5%9F%BA%E4%BA%8EHalcon%E7%9A%84%E4%B8%89%E7%BB%B4%E7%82%B9%E4%BA%91%E5%A4%84%E7%90%86%EF%BC%88%E9%9E%8B%E7%82%B9%E8%83%B6%EF%BC%89/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">Yolo</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/%E6%9C%BA%E5%99%A8%E8%A7%86%E8%A7%89/">
+                                    <span class="chip bg-color">机器视觉</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">感谢打赏</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.jpg" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+        <style>
+    .valine-card {
+        margin: 1.5rem auto;
+    }
+
+    .valine-card .card-content {
+        padding: 20px 20px 5px 20px;
+    }
+
+    #vcomments textarea {
+        box-sizing: border-box;
+        background: url("/medias/comment_bg.png") 100% 100% no-repeat;
+    }
+
+    #vcomments p {
+        margin: 2px 2px 10px;
+        font-size: 1.05rem;
+        line-height: 1.78rem;
+    }
+
+    #vcomments blockquote p {
+        text-indent: 0.2rem;
+    }
+
+    #vcomments a {
+        padding: 0 2px;
+        color: #4cbf30;
+        font-weight: 500;
+        text-decoration: none;
+    }
+
+    #vcomments img {
+        max-width: 100%;
+        height: auto;
+        cursor: pointer;
+    }
+
+    #vcomments ol li {
+        list-style-type: decimal;
+    }
+
+    #vcomments ol,
+    ul {
+        display: block;
+        padding-left: 2em;
+        word-spacing: 0.05rem;
+    }
+
+    #vcomments ul li,
+    ol li {
+        display: list-item;
+        line-height: 1.8rem;
+        font-size: 1rem;
+    }
+
+    #vcomments ul li {
+        list-style-type: disc;
+    }
+
+    #vcomments ul ul li {
+        list-style-type: circle;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    #vcomments table, th, td {
+        border: 0;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments h1 {
+        font-size: 1.85rem;
+        font-weight: bold;
+        line-height: 2.2rem;
+    }
+
+    #vcomments h2 {
+        font-size: 1.65rem;
+        font-weight: bold;
+        line-height: 1.9rem;
+    }
+
+    #vcomments h3 {
+        font-size: 1.45rem;
+        font-weight: bold;
+        line-height: 1.7rem;
+    }
+
+    #vcomments h4 {
+        font-size: 1.25rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    #vcomments h5 {
+        font-size: 1.1rem;
+        font-weight: bold;
+        line-height: 1.4rem;
+    }
+
+    #vcomments h6 {
+        font-size: 1rem;
+        line-height: 1.3rem;
+    }
+
+    #vcomments p {
+        font-size: 1rem;
+        line-height: 1.5rem;
+    }
+
+    #vcomments hr {
+        margin: 12px 0;
+        border: 0;
+        border-top: 1px solid #ccc;
+    }
+
+    #vcomments blockquote {
+        margin: 15px 0;
+        border-left: 5px solid #42b983;
+        padding: 1rem 0.8rem 0.3rem 0.8rem;
+        color: #666;
+        background-color: rgba(66, 185, 131, .1);
+    }
+
+    #vcomments pre {
+        font-family: monospace, monospace;
+        padding: 1.2em;
+        margin: .5em 0;
+        background: #272822;
+        overflow: auto;
+        border-radius: 0.3em;
+        tab-size: 4;
+    }
+
+    #vcomments code {
+        font-family: monospace, monospace;
+        padding: 1px 3px;
+        font-size: 0.92rem;
+        color: #e96900;
+        background-color: #f8f8f8;
+        border-radius: 2px;
+    }
+
+    #vcomments pre code {
+        font-family: monospace, monospace;
+        padding: 0;
+        color: #e8eaf6;
+        background-color: #272822;
+    }
+
+    #vcomments pre[class*="language-"] {
+        padding: 1.2em;
+        margin: .5em 0;
+    }
+
+    #vcomments code[class*="language-"],
+    pre[class*="language-"] {
+        color: #e8eaf6;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+
+    #vcomments b,
+    strong {
+        font-weight: bold;
+    }
+
+    #vcomments dfn {
+        font-style: italic;
+    }
+
+    #vcomments small {
+        font-size: 85%;
+    }
+
+    #vcomments cite {
+        font-style: normal;
+    }
+
+    #vcomments mark {
+        background-color: #fcf8e3;
+        padding: .2em;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+</style>
+
+<div class="card valine-card" data-aos="fade-up">
+    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; padding-left: 20px; top: 15px; padding-bottom: 5px;">
+        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+        <span>评论</span>
+    </div>
+    <div id="vcomments" class="card-content" style="display: grid">
+    </div>
+</div>
+
+<script src="/libs/valine/av-min.js"></script>
+<script src="/libs/valine/Valine.min.js"></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        appId: 'gOywyl0R9LxxdE93gftpTjG9-gzGzoHsz',
+        appKey: 'xVJSnETyvvLZBUaSbHYauYWp',
+        notify: 'false' === 'true',
+        verify: 'false' === 'true',
+        visitor: 'true' === 'true',
+        avatar: 'mm',
+        pageSize: '10',
+        lang: 'zh-cn',
+        placeholder: 'just go go'
+    });
+</script>
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
+            <div class="card">
+                <a href="/2024/09/22/%E5%9F%BA%E4%BA%8EHalcon%E7%9A%84%E4%B8%89%E7%BB%B4%E7%82%B9%E4%BA%91%E5%A4%84%E7%90%86%EF%BC%88%E9%9E%8B%E7%82%B9%E8%83%B6%EF%BC%89/">
+                    <div class="card-image">
+                        
+                        <img src="https://s2.loli.net/2024/09/22/JYIUR5v78w9GQeX.jpg" class="responsive-img" alt="基于Halcon的三维点云处理（鞋点胶）">
+                        
+                        <span class="card-title">基于Halcon的三维点云处理（鞋点胶）</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            鞋点胶的程序实例
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2024-09-22
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            Yolo
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E6%9C%BA%E5%99%A8%E8%A7%86%E8%A7%89/">
+                        <span class="chip bg-color">机器视觉</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2024/09/22/%E5%9F%BA%E4%BA%8ETCPUDP%E7%9A%84%E7%AE%80%E5%8D%95%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%92%8C%E6%9C%8D%E5%8A%A1%E7%AB%AF%E9%80%9A%E8%AE%AF%E7%A8%8B%E5%BA%8F/">
+                    <div class="card-image">
+                        
+                        <img src="https://s2.loli.net/2024/09/22/oLcxRSyMnQWUGXK.jpg" class="responsive-img" alt="基于TCP/UDP的简单客户端和服务端通讯程序">
+                        
+                        <span class="card-title">基于TCP/UDP的简单客户端和服务端通讯程序</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            基于TCP/UDP的简单客户端和服务端通讯程序设计
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2024-09-22
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            Yolo
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/">
+                        <span class="chip bg-color">人工智能</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('8'),
+            headingSelector: 'h1, h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h1, h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+    <div class="container row center-align" style="margin-bottom: 15px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2024</span>
+            
+            <span id="year">2024</span>
+            <a href="/about" target="_blank">Yolo</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                class="white-color">66.7k</span>&nbsp;字
+            
+            
+            
+            <br>
+            
+            <span id="sitetime">载入运行时间...</span>
+            <script>
+                function siteTime() {
+                    var seconds = 1000;
+                    var minutes = seconds * 60;
+                    var hours = minutes * 60;
+                    var days = hours * 24;
+                    var years = days * 365;
+                    var today = new Date();
+                    var startYear = "2024";
+                    var startMonth = "5";
+                    var startDate = "11";
+                    var startHour = "0";
+                    var startMinute = "0";
+                    var startSecond = "0";
+                    var todayYear = today.getFullYear();
+                    var todayMonth = today.getMonth() + 1;
+                    var todayDate = today.getDate();
+                    var todayHour = today.getHours();
+                    var todayMinute = today.getMinutes();
+                    var todaySecond = today.getSeconds();
+                    var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                    var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                    var diff = t2 - t1;
+                    var diffYears = Math.floor(diff / years);
+                    var diffDays = Math.floor((diff / days) - diffYears * 365);
+                    var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+                    var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
+                        minutes);
+                    var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours -
+                        diffMinutes * minutes) / seconds);
+                    if (startYear == todayYear) {
+                        document.getElementById("year").innerHTML = todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffDays + " 天 " + diffHours +
+                            " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    } else {
+                        document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffYears + " 年 " + diffDays +
+                            " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    }
+                }
+                setInterval(siteTime, 1000);
+            </script>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link ">
+    <a href="https://github.com/zw0927/zw0927.github.io" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:2946473607@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=2946473607" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 2946473607" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+    <a href="weixin://contacts/profile/Zw18502786548" class="tooltipped" target="_blank" data-tooltip="微信联系我: Zw18502786548" data-position="top" data-delay="50">
+        <i class="fab fa-weixin"></i>
+    </a>
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+
+    
+
+    
+
+	
+    
+
+    
+    
+    <script type="text/javascript" size="150" alpha='0.6'
+        zIndex="-1" src="/libs/background/ribbon-refresh.min.js" async="async"></script>
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>
