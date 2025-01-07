@@ -1,0 +1,1703 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="企业员工登记管理系统（QT+Netty开发）, Yolo&#39;s blog">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>企业员工登记管理系统（QT+Netty开发） | Yolo&#39;s blog</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery.min.js"></script>
+
+<meta name="generator" content="Hexo 7.2.0"></head>
+
+
+ 
+
+
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Yolo&#39;s blog</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Yolo&#39;s blog</div>
+        <div class="logo-desc">
+            
+            Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/zw0927/zw0927.github.io" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/zw0927/zw0927.github.io" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/14.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">企业员工登记管理系统（QT+Netty开发）</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+	
+	#toc-content {
+    height: calc(100vh - 250px);
+    overflow: scroll;
+}
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/Socket/">
+                                <span class="chip bg-color">Socket</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2025-01-07
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2025-01-07
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    7.7k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    27 分
+                </div>
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.css">
+        
+
+        
+        <!-- 代码块折行 -->
+        <style type="text/css">
+            code[class*="language-"], pre[class*="language-"] { white-space: pre-wrap !important; }
+        </style>
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="1-序言"><a href="#1-序言" class="headerlink" title="1.序言"></a><strong>1.序言</strong></h1><p>​	在当今竞争激烈的商业环境中，企业的高效管理对于其生存与发展起着至关重要的作用。而人力资源管理作为企业管理的核心组成部分之一，直接关系到企业的运营效率、员工满意度以及整体竞争力。随着信息技术的飞速发展，传统的人工管理方式已难以满足现代企业对员工信息管理的需求。企业迫切需要一套自动化、智能化且安全可靠的员工登记管理系统，以实现对员工信息的精准掌控与高效利用。</p>
+<p>​	本企业员工登记管理系统的开发与应用，不仅有助于企业提高员工信息管理的效率与质量，还能推动企业管理的数字化转型进程。通过自动化的信息处理与智能的数据分析功能，企业能够更好地了解员工队伍的构成与需求，制定更加科学合理的人力资源战略，从而在激烈的市场竞争中脱颖而出，实现可持续发展。本论文将详细阐述该系统的设计理念、技术实现细节以及功能应用效果，为企业员工登记管理系统的研究与实践提供有益的参考与借鉴。</p>
+<h1 id="2-概要设计"><a href="#2-概要设计" class="headerlink" title="2.概要设计"></a><strong>2.概要设计</strong></h1><h2 id="2-1系统概述"><a href="#2-1系统概述" class="headerlink" title="2.1系统概述"></a>2.1系统概述</h2><p>​	企业员工登记管理系统旨在构建一个集成化、高效且安全可靠的平台，用于全面管理企业员工的各类信息以及操作员对系统的访问操作。通过自动化和信息化的手段，实现员工信息的准确录入、便捷查询、灵活更新与规范删除，同时确保操作员登录管理的安全性与权限可控性，从而提升企业人力资源管理的整体效率和决策科学性，以适应现代企业快速发展与精细化管理的需求。</p>
+<p>​	系统的功能涵盖了操作员登录管理与企业员工管理两大核心板块。操作员登录管理模块通过严格的注册、登录与密码修改流程，保障了系统的安全性与访问权限的可控性。只有经过授权的操作员才能进入系统，防止了非法用户的入侵与数据泄露风险。而企业员工管理模块则实现了员工信息的全生命周期管理，从新增员工信息的录入，到员工信息的便捷查询，再到员工信息的精准删除，每一个环节都经过精心设计与优化，确保了信息的准确性与及时性，为企业人力资源决策提供了有力的数据支持。</p>
+<h2 id="2-2-技术架构概述"><a href="#2-2-技术架构概述" class="headerlink" title="2.2 技术架构概述"></a>2.2 技术架构概述</h2><p>​	服务端采用 Netty 框架进行开发。Netty 以其卓越的异步事件驱动机制，能够轻松应对高并发的网络连接请求，确保系统在大量用户同时访问的情况下仍能保持稳定运行，为企业多部门、多人员的协同使用提供了坚实的技术保障。它能够高效地处理数据传输与业务逻辑，极大地提升了系统的性能与响应速度，减少了用户等待时间，提高了工作效率。</p>
+<p>​	客户端则基于 QT（C++）语言平台打造，并配备了简洁美观的 GUI 界面。QT 丰富的类库和强大的跨平台特性，使得客户端应用能够在不同操作系统上流畅运行，满足企业多样化的部署需求。其基于 QSocket 的通信代码确保了客户端与服务端之间数据传输的稳定性与可靠性，实现了无缝的数据交互。而精心设计的 GUI 界面注重用户体验，操作简便直观，即使是非技术人员也能快速上手，降低了企业员工的学习成本，提高了系统的易用性与接受度。</p>
+<p>​	在数据存储方面，系统借助 MySQL 数据库来管理海量的员工信息。MySQL 作为一款成熟且广泛应用的关系型数据库管理系统，具备强大的数据存储与管理能力，能够确保数据的完整性、一致性和安全性。通过合理的数据库表结构设计与索引优化，系统能够快速地进行数据的插入、查询、更新与删除操作，为企业提供及时、准确的员工信息服务。</p>
+<p>大致开发框架如下图所示：</p>
+<p><img src="/2025/01/07/%E4%BC%81%E4%B8%9A%E5%91%98%E5%B7%A5%E7%99%BB%E8%AE%B0%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%EF%BC%88QT-Netty%E5%BC%80%E5%8F%91%EF%BC%89/111.png" alt="111"></p>
+<h1 id="3-详细设计"><a href="#3-详细设计" class="headerlink" title="3.详细设计"></a><strong>3.详细设计</strong></h1><h2 id="3-1服务端详细设计"><a href="#3-1服务端详细设计" class="headerlink" title="3.1服务端详细设计"></a>3.1服务端详细设计</h2><p>服务端采用三层架构的方式进行开发</p>
+<p>（1）Controller层</p>
+<p>Controller 层在服务端架构中处于对外交互的最前端，是客户端与服务端内部逻辑之间的通信枢纽。它主要负责接收来自客户端发送的各类数据请求，并对这些请求进行初步的处理与分发。从技术实现角度来看，Controller 层需要具备良好的网络通信适配能力，能够准确解析客户端通过不同网络协议发送过来的数据格式，并将其转换为服务端内部能够理解和处理的对象模型或数据结构。例如，在处理操作员登录请求时，Controller 层需要从客户端传来的 JSON 格式数据中提取出登录名和密码等关键信息，并封装成对应的登录请求对象，以便后续传递给 Service 层进行业务逻辑验证。</p>
+<p>（2）Service层</p>
+<p>Service 层作为系统业务逻辑的核心处理层，承担着对 Controller 层传递过来的数据请求进行深入业务逻辑处理的重任。它负责实现系统的各种业务规则和业务流程，包括数据的验证、计算、事务处理以及与其他系统模块的交互协调等工作。以企业员工管理中的新增员工功能为例，Service 层不仅要对传入的员工信息进行全面细致的合法性验证，如检查身份证号的格式是否正确、是否与已存在员工的身份证号冲突（通过调用 Mapper 层的查询方法进行查重），还要根据企业的业务规则对员工的工资标准、技术等级等信息进行合理性审核。此外，在涉及到多个数据库操作的业务场景中，如新增员工同时需要更新相关统计数据或关联表信息时，Service 层需要通过事务管理机制确保这些操作的原子性，即要么全部成功执行，要么全部回滚，以保证数据的一致性和完整性。</p>
+<p>（3）Mapper层</p>
+<p>Mapper 层专注于实现与数据库的交互操作，它在整个服务端架构中起到了数据持久化的关键作用。其主要任务是将 Service 层传递过来的业务数据对象与数据库中的表记录进行映射转换，包括数据的插入、查询、更新和删除等操作。在本系统中，采用 MyBatis 框架与 MySQL 数据库进行交互，MyBatis 以其灵活的 SQL 映射机制和强大的缓存管理功能，为数据持久化操作提供了高效的解决方案。例如，在插入员工信息时，Mapper 层需要根据传入的员工对象，将其各个属性值映射到对应的数据库表字段，并生成相应的 SQL 插入语句（通过 MyBatis 的注解方式配置），然后执行该语句将员工数据插入到 MySQL 数据库中。在查询员工信息时，Mapper 层根据 Service 层提供的查询条件构建 SQL 查询语句，从数据库中获取符合条件的记录，并将这些记录映射回对应的员工对象列表或单个员工对象，以便返回给 Service 层进行后续处理。</p>
+<p><img src="/2025/01/07/%E4%BC%81%E4%B8%9A%E5%91%98%E5%B7%A5%E7%99%BB%E8%AE%B0%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%EF%BC%88QT-Netty%E5%BC%80%E5%8F%91%EF%BC%89/mapper.png" alt="mapper"></p>
+<p>并且，服务端采用Spring架构，服务端中的各种类对象实现了自动注入的操作。</p>
+<p>Spring 容器负责创建各个对象实例，并根据对象之间的依赖关系，在合适的时机将依赖对象自动注入到需要它们的目标对象中。这样，目标对象无需关心依赖对象是如何被创建的，只需要关注自身的业务逻辑即可。</p>
+<p>另外，服务端采用Netty架构</p>
+<p>Netty 基于异步事件驱动的设计理念，使其在处理大量客户端并发连接请求时表现卓越。它采用了非阻塞 I&#x2F;O 操作模式，能够在单个线程中高效地处理多个网络连接的读写事件，避免了传统阻塞 I&#x2F;O 模型中线程上下文切换和等待带来的性能开销。例如，在企业员工登记管理系统中，当众多客户端同时发起操作员登录请求或员工信息操作请求时，Netty 能够利用其高效的事件循环机制，有条不紊地管理这些并发连接，将各个客户端的请求准确地分配到对应的处理线程中进行处理，确保系统在高并发场景下依然能够保持快速响应，不会因大量并发请求而导致系统卡顿或崩溃现象。</p>
+<p>在本企业员工登记管理系统的服务端设计中，三层架构（Controller、Service、Mapper）与 Netty 架构相互协作，共同构建了一个强大而稳定的服务端体系。</p>
+<p>Controller 层在接收客户端请求时，依托 Netty 强大的网络通信能力，快速准确地获取客户端数据。Netty 将接收到的网络数据传递给 Controller 层，Controller 层利用其网络通信适配能力解析数据并封装成相应的请求对象，然后将请求传递给 Service 层。Service 层在进行业务逻辑处理过程中，可能需要与数据库进行交互，此时它调用 Mapper 层的方法。Mapper 层借助 MyBatis 与 MySQL 数据库进行高效的数据持久化操作，如查询员工信息、插入新员工数据等。在整个过程中，Spring 架构的自动注入机制确保了各层之间的依赖对象能够正确地被创建和注入，使得各层之间的协作更加顺畅。</p>
+<p>例如，当客户端发起新增员工请求时，Netty 接收请求数据并将其交给 Controller 层，Controller 层解析数据后创建新增员工请求对象并传递给 Service 层。Service 层首先对员工信息进行合法性验证和业务规则审核，若验证通过，则调用 Mapper 层的插入方法。Mapper 层根据员工对象信息生成 SQL 插入语句并执行插入操作，将员工数据存储到 MySQL 数据库中。在这个过程中，Netty 保障了数据的快速传输，三层架构明确了各层的职责分工，Spring 实现了对象的自动注入，它们相互配合，使得系统能够稳定高效地运行，满足企业员工登记管理的各项业务需求，并具备良好的可维护性和可扩展性，以应对未来业务的发展和变化。</p>
+<p>ServerHandle处理代码如下:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ChannelHandler</span>.Sharable</span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ServerHandler</span> <span class="keyword">extends</span> <span class="title class_">SimpleChannelInboundHandler</span>&lt;String&gt; <span class="keyword">implements</span> <span class="title class_">ApplicationContextAware</span> &#123;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> ApplicationContext applicationContext;</span><br><span class="line"> </span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> AdminService adminService;</span><br><span class="line"> </span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setApplicationContext</span><span class="params">(ApplicationContext applicationContext)</span> &#123;</span><br><span class="line">        ServerHandler.applicationContext = applicationContext;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> ServerHandler <span class="title function_">getInstance</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> applicationContext.getBean(ServerHandler.class);</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">void</span> <span class="title function_">channelRead0</span><span class="params">(ChannelHandlerContext ctx, String msg)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;收到客户端消息: &quot;</span> + msg);</span><br><span class="line">        adminService.handleoperation(ctx, msg);</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="comment">//调用时机：当通道变为活跃状态时被调用。</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">channelActive</span><span class="params">(ChannelHandlerContext ctx)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;有新客户端连接: &quot;</span> + ctx.channel().remoteAddress());</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="comment">//调用时机：当通道变为非活跃状态时被调用。</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">channelInactive</span><span class="params">(ChannelHandlerContext ctx)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;客户端断开连接: &quot;</span> + ctx.channel().remoteAddress());</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="comment">//调用时机：当通道内发生异常时被调用。</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">exceptionCaught</span><span class="params">(ChannelHandlerContext ctx, Throwable cause)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        cause.printStackTrace();</span><br><span class="line">        ctx.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="3-2客户端详细设计"><a href="#3-2客户端详细设计" class="headerlink" title="3.2客户端详细设计"></a>3.2客户端详细设计</h2><p>客户端作为企业员工登记管理系统与用户直接交互的界面端，基于 C++ 的 QT 框架构建，承担着信息展示、用户操作接收以及与服务端通信交互的关键任务。其设计遵循模块化、易用性和高效性原则，旨在为操作员提供便捷、直观且功能完备的操作体验，以实现企业员工信息管理相关业务流程的顺畅推进。</p>
+<p>客户端采用QSocket框架，将客户端的数据请求发送给Netty服务端，当客户端需要向服务端发送数据时，如前面提到的登录请求、注册请求、员工管理相关请求等，首先将请求数据按照预定的数据结构和格式进行封装。对于本系统，采用 JSON 格式进行数据交换，因此需要将各类请求数据（如登录名、密码、员工信息等）转换为 JSON 对象。</p>
+<p>Json格式的数据封装过程如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">QJsonObject userCredentials;</span><br><span class="line">userCredentials[<span class="string">&quot;name&quot;</span>] = Public_Use::old_login_admin.name;</span><br><span class="line">userCredentials[<span class="string">&quot;sex&quot;</span>] = Public_Use::old_login_admin.sex;</span><br><span class="line">userCredentials[<span class="string">&quot;phone_number&quot;</span>] = Public_Use::old_login_admin.phone_number;</span><br><span class="line">userCredentials[<span class="string">&quot;user_name&quot;</span>] = Public_Use::old_login_admin.user_name;</span><br><span class="line">userCredentials[<span class="string">&quot;password&quot;</span>] = Public_Use::old_login_admin.pass_word;</span><br><span class="line">userCredentials[<span class="string">&quot;email&quot;</span>] = Public_Use::old_login_admin.email;</span><br><span class="line"> </span><br><span class="line"><span class="comment">// 将用户信息放入一个 JSON 数组</span></span><br><span class="line">QJsonArray dataArray;</span><br><span class="line">dataArray.<span class="built_in">append</span>(userCredentials);</span><br><span class="line"> </span><br><span class="line"><span class="comment">// 创建消息包对象</span></span><br><span class="line">Message_pack package;</span><br><span class="line">package.operation = <span class="string">&quot;DELETE_ADMIN&quot;</span>;</span><br><span class="line">package.code = <span class="string">&quot;200&quot;</span>;</span><br><span class="line">package.data = dataArray;</span><br><span class="line"> </span><br><span class="line"><span class="comment">// 封装 JSON 数据</span></span><br><span class="line">QByteArray jsonData = package.<span class="built_in">createJson</span>();</span><br><span class="line"> </span><br><span class="line"><span class="comment">// 打印生成的 JSON 字符串</span></span><br><span class="line"><span class="built_in">qDebug</span>() &lt;&lt; <span class="string">&quot;Generated JSON:&quot;</span> &lt;&lt; jsonData;</span><br><span class="line">Public_Use::socket-&gt;<span class="built_in">write</span>(jsonData);</span><br></pre></td></tr></table></figure>
+
+
+
+<p>客户端采用c++面向对象的开发思想，对各种界面、实体类、数据对象进行封装，代码简洁易懂</p>
+<p>一、界面类封装<br>在基于 C++ 的 QT 客户端开发中，界面类的封装是构建用户友好交互环境的关键。例如，对于登录界面类 LoginWidget，它继承自 QWidget，封装了登录相关的界面元素和操作逻辑。在类内部，将登录名输入框 QLineEdit、密码输入框 QLineEdit 以及登录按钮 QPushButton 等界面组件作为私有成员变量进行声明和初始化。通过专门的布局函数，如 setupLayout，使用 QVBoxLayout 或 QGridLayout 对这些组件进行合理布局，确保界面的整齐美观和易用性。</p>
+<p>二、实体类封装<br>实体类用于表示系统中的真实对象，在企业员工登记管理系统客户端中，Employee 实体类是一个典型代表。它封装了员工的各种属性，如员工 ID（int employeeId）、姓名（QString name）、性别（QString gender）、身份证号（QString idNumber）、出生日期（QDate birthDate）、家庭住址（QString homeAddress）、联系电话（QString phoneNumber）、工资标准（double salaryStandard）和技术等级（QString technicalLevel）等作为私有成员变量。通过提供公有的 getter 和 setter 函数，如 getEmployeeId、setEmployeeId、getName、setName 等，可以方便地访问和修改这些属性。</p>
+<p>通过对界面类、实体类和数据对象的精心封装，客户端代码实现了高内聚、低耦合的设计目标。各个类专注于自身的功能职责，相互协作又相对独立，使得整个客户端代码结构清晰、易于理解和维护，同时也提高了代码的可复用性和可扩展性，为企业员工登记管理系统客户端的稳定运行和功能升级奠定了坚实的基础。<em><strong>*3.3 数据库详细设计*</strong></em></p>
+<p>数据库对象一共有两个</p>
+<p>admin管理员表:</p>
+<table>
+<thead>
+<tr>
+<th>数据项名</th>
+<th>数据类型</th>
+<th>长度</th>
+<th>完整性约束</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>User_name</td>
+<td>char</td>
+<td>50</td>
+<td>主键</td>
+</tr>
+<tr>
+<td>password</td>
+<td>Char</td>
+<td>30</td>
+<td></td>
+</tr>
+<tr>
+<td>name</td>
+<td>char</td>
+<td>30</td>
+<td></td>
+</tr>
+<tr>
+<td>Phone_number</td>
+<td>char</td>
+<td>30</td>
+<td></td>
+</tr>
+<tr>
+<td>email</td>
+<td>Char</td>
+<td>50</td>
+<td></td>
+</tr>
+<tr>
+<td>sex</td>
+<td>char</td>
+<td>10</td>
+<td></td>
+</tr>
+</tbody></table>
+<p>表 1 管理员表</p>
+<p><img src="/2025/01/07/%E4%BC%81%E4%B8%9A%E5%91%98%E5%B7%A5%E7%99%BB%E8%AE%B0%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%EF%BC%88QT-Netty%E5%BC%80%E5%8F%91%EF%BC%89/%E5%9B%BE%E7%89%871.png" alt="图片1"></p>
+<p>Staff员工表</p>
+<table>
+<thead>
+<tr>
+<th>数据项名</th>
+<th>数据类型</th>
+<th>长度</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>name</td>
+<td>char</td>
+<td>30</td>
+</tr>
+<tr>
+<td>sex</td>
+<td>Char</td>
+<td>10</td>
+</tr>
+<tr>
+<td>IDCard</td>
+<td>char</td>
+<td>50</td>
+</tr>
+<tr>
+<td>birth</td>
+<td>char</td>
+<td>30</td>
+</tr>
+<tr>
+<td>address</td>
+<td>Char</td>
+<td>100</td>
+</tr>
+<tr>
+<td>Phone_number</td>
+<td>char</td>
+<td>30</td>
+</tr>
+<tr>
+<td>wages</td>
+<td>char</td>
+<td>50</td>
+</tr>
+<tr>
+<td>rank</td>
+<td>char</td>
+<td>10</td>
+</tr>
+</tbody></table>
+<p>表 2 员工表</p>
+<p><img src="/2025/01/07/%E4%BC%81%E4%B8%9A%E5%91%98%E5%B7%A5%E7%99%BB%E8%AE%B0%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%EF%BC%88QT-Netty%E5%BC%80%E5%8F%91%EF%BC%89/%E5%9B%BE%E7%89%872.png" alt="图片2"></p>
+<p>索引设计：</p>
+<p>建立索引的一般规则：</p>
+<p>1.在主键属性列和外键属性列上通常都可以分别建立索引，不仅有助于唯一性检查和完整性检查，而且可以加快连接查询的速度。</p>
+<p>2.以查询为主的关系可建立尽可能多的索引。</p>
+<p>3.对等值连接，但满足条件的元组较少的查询可以考虑建立索引。</p>
+<p>4.如果查询可以从索引直接得到结果而不必访问关系，则对此种查询可以建立索引。</p>
+<p>所以我们建了这些索引：</p>
+<p>（1）Admin管理员表 索引：用户名user_name</p>
+<p>（2）Staff员工表 索引：身份证号IDCard</p>
+<h2 id="3-4系统功能设计"><a href="#3-4系统功能设计" class="headerlink" title="3.4系统功能设计"></a>3.4系统功能设计</h2><p>​	系统功能包括操作员注册、登录、修改密码、新增员工(姓名、性别、身份证号、出生日期、家庭住址、联系电话、工资标准、技术等级)，各种分类高级查询员工信息，删除员工，修改员工信息，导入导出员工数据。</p>
+<p>整个系统的功能图如下：</p>
+<p><img src="/2025/01/07/%E4%BC%81%E4%B8%9A%E5%91%98%E5%B7%A5%E7%99%BB%E8%AE%B0%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%EF%BC%88QT-Netty%E5%BC%80%E5%8F%91%EF%BC%89/%E5%9B%BE%E7%89%873.png" alt="图片3"></p>
+<h3 id="（1）操作员注册"><a href="#（1）操作员注册" class="headerlink" title="（1）操作员注册"></a>（1）操作员注册</h3><p>允许新操作员在系统中创建账号，录入个人基本信息，包括登录用户名、密码、姓名、联系电话以及性别等。系统将对输入信息进行全面的合法性校验，确保注册信息的准确性和完整性。例如，登录用户名需满足特定的命名规则，不能包含特殊字符且在系统内具有唯一性；密码需达到一定的强度要求，如包含数字、字母和特殊字符的组合，长度不少于 8 位等，校验通过后，将操作员信息存储到数据库中对应的操作员表中，以便后续登录验证使用。</p>
+<h3 id="（2）操作员登录"><a href="#（2）操作员登录" class="headerlink" title="（2）操作员登录"></a>（2）操作员登录</h3><p>已注册的操作员通过输入正确的登录用户名和密码进行系统登录。系统在接收到登录请求后，首先对用户名和密码进行非空校验，然后将其与数据库中存储的操作员信息进行比对验证。若验证成功，为操作员创建登录会话，使其能够进入系统操作界面；若验证失败，提示相应的错误信息，如 “用户名或密码错误，请重新输入”。</p>
+<h3 id="（3）操作员找回密码"><a href="#（3）操作员找回密码" class="headerlink" title="（3）操作员找回密码"></a>（3）操作员找回密码</h3><p>已登录的操作员可在系统中找回自己的密码。找回密码时，操作员需先输入用户名和邮箱进行身份验证，通过邮件的验证码验证后，再设置新密码。新密码同样需满足系统设定的强度要求，如前所述。密码修改成功后，更新数据库中对应操作员的密码信息，并提示操作员 “密码修改成功，请牢记新密码”。若原密码输入错误，则提示 “用户名或邮箱不匹配，请重新输入！”。</p>
+<h3 id="（4）新增员工"><a href="#（4）新增员工" class="headerlink" title="（4）新增员工"></a>（4）新增员工</h3><p>操作员可在系统中录入新员工的详细信息，包括姓名、性别、身份证号、出生日期、家庭住址、联系电话、工资标准以及技术等级等。系统对输入的员工信息进行全面的合法性校验，如姓名、家庭住址等文本信息不能超过特定长度且不能包含非法字符；身份证号需符合国家标准的 18 位身份证号码格式，并通过身份证号码校验算法进行验证；出生日期需符合日期格式要求；联系电话需为有效的电话号码格式；工资标准需为合理的数值范围；技术等级需从预定义的技术等级列表中选择。校验通过后，将员工信息插入到数据库中的员工表中，并提示操作员 “员工新增成功”。若信息校验不通过，根据具体错误情况提示相应的错误信息。</p>
+<h3 id="（5）删除员工"><a href="#（5）删除员工" class="headerlink" title="（5）删除员工"></a>（5）删除员工</h3><p>操作员可在系统中选择要删除的员工记录，系统在执行删除操作前，会弹出确认对话框，提示操作员 “确定要删除该员工信息吗？此操作不可恢复”，以防止误操作。操作员确认后，系统根据员工的唯一标识（如员工 ID）从数据库的员工表中删除相应的记录，并更新相关的数据统计信息，如员工总数、各部门员工数量等。删除成功后，提示操作员 “员工信息删除成功”。若删除过程中出现错误，如数据库连接异常或违反外键约束等情况，提示相应的错误信息，如 “删除失败，请稍后重试或联系系统管理员”。</p>
+<h3 id="（6）修改员工"><a href="#（6）修改员工" class="headerlink" title="（6）修改员工"></a>（6）修改员工</h3><p>操作员可对已存在的员工信息进行修改。在修改员工信息时，首先查询出要修改的员工原始信息并展示在修改页面上，操作员可对其中的部分或全部信息进行修改，修改后的信息同样需经过合法性校验，校验规则与新增员工信息时相同。校验通过后，将修改后的员工信息更新到数据库中的员工表中，并提示操作员 “员工信息修改成功”。若校验不通过，提示相应的错误信息，如 “修改后的工资标准格式错误，请重新输入”。</p>
+<h3 id="（7）查询员工"><a href="#（7）查询员工" class="headerlink" title="（7）查询员工"></a>（7）查询员工</h3><p><strong>功能描述</strong>：提供多种灵活的查询方式，以便操作员能够快速准确地获取所需的员工信息。查询条件包括但不限于以下分类：</p>
+<p><strong>按基本信息查询</strong>：可根据员工的姓名、性别、身份证号、联系电话等基本信息进行精确查询或模糊查询。例如，输入员工姓名的部分字符，即可查询出所有姓名包含该字符的员工信息；输入完整的身份证号，可精确查询到对应的员工信息。</p>
+<p><strong>按工资标准查询</strong>：支持按照工资标准的数值范围进行查询，如查询工资标准在 5000 - 8000 元之间的员工信息，可用于了解特定工资段的员工分布情况，为企业薪酬管理提供数据支持。</p>
+<p><strong>按技术等级查询</strong>：根据员工的技术等级进行查询，可快速筛选出具有特定技术能力的员工群体，如查询所有技术等级为高级的员工信息，以便在项目分配或技术研发任务安排时能够精准定位合适的人员。</p>
+<h3 id="（8）导入导出员工"><a href="#（8）导入导出员工" class="headerlink" title="（8）导入导出员工"></a>（8）导入导出员工</h3><p><strong>数据导入</strong>：允许操作员将外部的员工数据文件（如 Excel 格式文件）导入到系统中，以批量添加员工信息。系统支持对导入文件的格式校验，确保文件中的数据列与系统员工表中的字段对应匹配，且数据格式符合系统要求。例如，文件中的列顺序应依次为姓名、性别、身份证号、出生日期、家庭住址、联系电话、工资标准、技术等级，每列数据的格式需与系统设定的格式一致。校验通过后，将文件中的员工数据批量插入到数据库中，并提示操作员 “数据导入成功，共导入 [X] 条员工信息”。若导入过程中出现错误，如文件格式错误、数据不合法等情况，提示相应的错误信息，如 “导入失败，第 [X] 行数据格式错误，请检查后重新导入”。</p>
+<p><strong>数据导出</strong>：操作员可根据需要将系统中的员工数据导出为指定格式的文件（如 Excel 格式），以便进行数据备份、数据分析或与其他系统进行数据交互。在导出数据时，操作员可选择要导出的员工数据范围，如全部员工数据、按特定查询条件筛选后的员工数据等。系统根据操作员的选择生成相应的数据文件，并提供下载链接，提示操作员 “数据导出成功，请点击下载链接获取文件”。</p>
+<h1 id="4-系统测试"><a href="#4-系统测试" class="headerlink" title="4.系统测试"></a><strong>4.系统测试</strong></h1><h2 id="4-1-系统运行测试"><a href="#4-1-系统运行测试" class="headerlink" title="4.1 系统运行测试"></a>4.1 系统运行测试</h2><p>联合spring 启动Netty服务端</p>
+<p><img src="/2025/01/07/%E4%BC%81%E4%B8%9A%E5%91%98%E5%B7%A5%E7%99%BB%E8%AE%B0%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%EF%BC%88QT-Netty%E5%BC%80%E5%8F%91%EF%BC%89/11.png" alt="11"></p>
+<p>启动QT的客户端</p>
+<p><img src="/2025/01/07/%E4%BC%81%E4%B8%9A%E5%91%98%E5%B7%A5%E7%99%BB%E8%AE%B0%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%EF%BC%88QT-Netty%E5%BC%80%E5%8F%91%EF%BC%89/22.png" alt="22"></p>
+<p>服务端和客户端连接成功显示</p>
+<p><img src="/2025/01/07/%E4%BC%81%E4%B8%9A%E5%91%98%E5%B7%A5%E7%99%BB%E8%AE%B0%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%EF%BC%88QT-Netty%E5%BC%80%E5%8F%91%EF%BC%89/33.png" alt="33"></p>
+<p>服务端和客户端断开连接显示</p>
+<p><img src="/2025/01/07/%E4%BC%81%E4%B8%9A%E5%91%98%E5%B7%A5%E7%99%BB%E8%AE%B0%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%EF%BC%88QT-Netty%E5%BC%80%E5%8F%91%EF%BC%89/44.png" alt="44"></p>
+<p>服务端和客户端数据交互过程</p>
+<p><img src="/2025/01/07/%E4%BC%81%E4%B8%9A%E5%91%98%E5%B7%A5%E7%99%BB%E8%AE%B0%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%EF%BC%88QT-Netty%E5%BC%80%E5%8F%91%EF%BC%89/55.png" alt="55"></p>
+<h2 id="4-2-系统运行界面截图"><a href="#4-2-系统运行界面截图" class="headerlink" title="4.2 系统运行界面截图"></a>4.2 系统运行界面截图</h2><p>（1）登录界面</p>
+<p><strong>登录主页面截图</strong></p>
+<p><img src="/2025/01/07/%E4%BC%81%E4%B8%9A%E5%91%98%E5%B7%A5%E7%99%BB%E8%AE%B0%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%EF%BC%88QT-Netty%E5%BC%80%E5%8F%91%EF%BC%89/66.png" alt="66"></p>
+<p><strong>登录失败界面</strong></p>
+<p><img src="/2025/01/07/%E4%BC%81%E4%B8%9A%E5%91%98%E5%B7%A5%E7%99%BB%E8%AE%B0%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%EF%BC%88QT-Netty%E5%BC%80%E5%8F%91%EF%BC%89/77.png" alt="77"></p>
+<p><strong>登录成功界面</strong></p>
+<p><img src="/2025/01/07/%E4%BC%81%E4%B8%9A%E5%91%98%E5%B7%A5%E7%99%BB%E8%AE%B0%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%EF%BC%88QT-Netty%E5%BC%80%E5%8F%91%EF%BC%89/88.png" alt="88"></p>
+<p><strong>（2）注册界面</strong></p>
+<p><strong>注册主页面</strong></p>
+<p><img src="/2025/01/07/%E4%BC%81%E4%B8%9A%E5%91%98%E5%B7%A5%E7%99%BB%E8%AE%B0%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%EF%BC%88QT-Netty%E5%BC%80%E5%8F%91%EF%BC%89/99.png" alt="99"></p>
+<p><strong>发送注册验证码界面</strong></p>
+<p><img src="/2025/01/07/%E4%BC%81%E4%B8%9A%E5%91%98%E5%B7%A5%E7%99%BB%E8%AE%B0%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%EF%BC%88QT-Netty%E5%BC%80%E5%8F%91%EF%BC%89/10.png" alt="10"></p>
+<p><strong>收到注册验证码 并且 注册成功页面</strong></p>
+<p><img src="/2025/01/07/%E4%BC%81%E4%B8%9A%E5%91%98%E5%B7%A5%E7%99%BB%E8%AE%B0%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%EF%BC%88QT-Netty%E5%BC%80%E5%8F%91%EF%BC%89/1111.png" alt="1111"></p>
+<p><img src="/2025/01/07/%E4%BC%81%E4%B8%9A%E5%91%98%E5%B7%A5%E7%99%BB%E8%AE%B0%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%EF%BC%88QT-Netty%E5%BC%80%E5%8F%91%EF%BC%89/1212.png" alt="1212"></p>
+<p>（3）<strong>找回密码界面</strong></p>
+<p><strong>找回密码界面</strong></p>
+<p><img src="/2025/01/07/%E4%BC%81%E4%B8%9A%E5%91%98%E5%B7%A5%E7%99%BB%E8%AE%B0%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%EF%BC%88QT-Netty%E5%BC%80%E5%8F%91%EF%BC%89/1313-1736235190565-175.png" alt="1313"></p>
+<p>找回密码需要同时验证码邮箱和用户名的一致性，并且需要输入相对应的验证码验证找回密码的用户身份</p>
+<p><strong>（4） 员工管理页面</strong></p>
+<p><strong>员工管理主界面</strong></p>
+<p><img src="/2025/01/07/%E4%BC%81%E4%B8%9A%E5%91%98%E5%B7%A5%E7%99%BB%E8%AE%B0%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%EF%BC%88QT-Netty%E5%BC%80%E5%8F%91%EF%BC%89/1414.png" alt="1414"></p>
+<p>如上图所示，在此页面可以对员工进行增删改查</p>
+<p>管理员可以对员工进行多条件查询或者单条件查询</p>
+<p>可以通过姓名、生日、性别、身份证号、等级、薪水、电话等进行查询</p>
+<p>如下图演示，我想查找性别为男的员工</p>
+<p><strong>查询界面</strong></p>
+<p><img src="/2025/01/07/%E4%BC%81%E4%B8%9A%E5%91%98%E5%B7%A5%E7%99%BB%E8%AE%B0%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%EF%BC%88QT-Netty%E5%BC%80%E5%8F%91%EF%BC%89/1515.png" alt="1515"></p>
+<p><strong>如下图演示，我想查找性别为男 并且 等级为1级 的员工</strong></p>
+<p><img src="/2025/01/07/%E4%BC%81%E4%B8%9A%E5%91%98%E5%B7%A5%E7%99%BB%E8%AE%B0%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%EF%BC%88QT-Netty%E5%BC%80%E5%8F%91%EF%BC%89/1616.png" alt="1616"></p>
+<p><strong>如下图演示，点击清除后，显示全部员工并且清理全部搜索条件</strong></p>
+<p><img src="/2025/01/07/%E4%BC%81%E4%B8%9A%E5%91%98%E5%B7%A5%E7%99%BB%E8%AE%B0%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%EF%BC%88QT-Netty%E5%BC%80%E5%8F%91%EF%BC%89/1717.png" alt="1717"></p>
+<p><strong>查看员工信息和修改员工信息</strong></p>
+<p><img src="/2025/01/07/%E4%BC%81%E4%B8%9A%E5%91%98%E5%B7%A5%E7%99%BB%E8%AE%B0%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%EF%BC%88QT-Netty%E5%BC%80%E5%8F%91%EF%BC%89/1818.png" alt="1818"></p>
+<p>数据会进行回显到输入框中，当点击确认之后就会进行判断，如果进行了修改就发送至Netty服务端，让服务端对数据库进行操作，如果没有进行修改那么只需要关闭窗口即可。</p>
+<p>删除员工</p>
+<p>如下图所示，我希望删除姓名为“张三”的员工信息，在选中员工行后，点击删除即可删除</p>
+<p><img src="/2025/01/07/%E4%BC%81%E4%B8%9A%E5%91%98%E5%B7%A5%E7%99%BB%E8%AE%B0%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%EF%BC%88QT-Netty%E5%BC%80%E5%8F%91%EF%BC%89/1919.png" alt="1919"></p>
+<p><img src="/2025/01/07/%E4%BC%81%E4%B8%9A%E5%91%98%E5%B7%A5%E7%99%BB%E8%AE%B0%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%EF%BC%88QT-Netty%E5%BC%80%E5%8F%91%EF%BC%89/2020.png" alt="2020"></p>
+<p><img src="/2025/01/07/%E4%BC%81%E4%B8%9A%E5%91%98%E5%B7%A5%E7%99%BB%E8%AE%B0%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%EF%BC%88QT-Netty%E5%BC%80%E5%8F%91%EF%BC%89/2121.png" alt="2121"></p>
+<p><strong>查看和修改管理员个人信息</strong></p>
+<p>如下图所示，密码默认是不显示的，在点击按钮后才进行显示</p>
+<p><img src="/2025/01/07/%E4%BC%81%E4%B8%9A%E5%91%98%E5%B7%A5%E7%99%BB%E8%AE%B0%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%EF%BC%88QT-Netty%E5%BC%80%E5%8F%91%EF%BC%89/2222.png" alt="2222"></p>
+<p><img src="/2025/01/07/%E4%BC%81%E4%B8%9A%E5%91%98%E5%B7%A5%E7%99%BB%E8%AE%B0%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%EF%BC%88QT-Netty%E5%BC%80%E5%8F%91%EF%BC%89/2323.png" alt="2323"></p>
+<p><img src="/2025/01/07/%E4%BC%81%E4%B8%9A%E5%91%98%E5%B7%A5%E7%99%BB%E8%AE%B0%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%EF%BC%88QT-Netty%E5%BC%80%E5%8F%91%EF%BC%89/2424.png" alt="2424"></p>
+<p>导入Excel文件</p>
+<p><img src="/2025/01/07/%E4%BC%81%E4%B8%9A%E5%91%98%E5%B7%A5%E7%99%BB%E8%AE%B0%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%EF%BC%88QT-Netty%E5%BC%80%E5%8F%91%EF%BC%89/2525.png" alt="2525"></p>
+<p>导出到Excel文件</p>
+<p><img src="/2025/01/07/%E4%BC%81%E4%B8%9A%E5%91%98%E5%B7%A5%E7%99%BB%E8%AE%B0%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%EF%BC%88QT-Netty%E5%BC%80%E5%8F%91%EF%BC%89/2626.png" alt="2626"></p>
+<p><img src="/2025/01/07/%E4%BC%81%E4%B8%9A%E5%91%98%E5%B7%A5%E7%99%BB%E8%AE%B0%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%EF%BC%88QT-Netty%E5%BC%80%E5%8F%91%EF%BC%89/2727.png" alt="2727"></p>
+<p><strong>退出登录</strong></p>
+<p><img src="/2025/01/07/%E4%BC%81%E4%B8%9A%E5%91%98%E5%B7%A5%E7%99%BB%E8%AE%B0%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%EF%BC%88QT-Netty%E5%BC%80%E5%8F%91%EF%BC%89/2828.png" alt="2828"></p>
+<p><img src="/2025/01/07/%E4%BC%81%E4%B8%9A%E5%91%98%E5%B7%A5%E7%99%BB%E8%AE%B0%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%EF%BC%88QT-Netty%E5%BC%80%E5%8F%91%EF%BC%89/2929.png" alt="2929"></p>
+<p><strong>注销账号</strong></p>
+<p><img src="/2025/01/07/%E4%BC%81%E4%B8%9A%E5%91%98%E5%B7%A5%E7%99%BB%E8%AE%B0%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%EF%BC%88QT-Netty%E5%BC%80%E5%8F%91%EF%BC%89/3030.png" alt="3030"></p>
+<p><img src="/2025/01/07/%E4%BC%81%E4%B8%9A%E5%91%98%E5%B7%A5%E7%99%BB%E8%AE%B0%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%EF%BC%88QT-Netty%E5%BC%80%E5%8F%91%EF%BC%89/2929-1736235582807-199.png" alt="2929"></p>
+<p><img src="/2025/01/07/%E4%BC%81%E4%B8%9A%E5%91%98%E5%B7%A5%E7%99%BB%E8%AE%B0%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%EF%BC%88QT-Netty%E5%BC%80%E5%8F%91%EF%BC%89/3232.png" alt="3232"></p>
+<h1 id="5-总结"><a href="#5-总结" class="headerlink" title="5. 总结"></a>5. <strong>总结</strong></h1><p>​	本企业员工登记管理系统以 Spring + Netty 构建服务端，Qt 开发客户端，MySQL 存储数据，打造了一套完整的员工信息管理方案，满足了课程项目对企业员工信息登记与管理功能的要求。 在技术应用上，Spring 框架为服务端奠定了坚实基础。其依赖注入特性实现了组件间的松耦合，方便各模块的独立开发与测试。例如，在员工信息处理流程中，业务逻辑层、数据访问层等各层对象通过 Spring 容器进行管理与装配，极大提高了代码的可维护性。Mybatis 简化了数据库操作，使得对 MySQL 数据库中员工信息表的增删改查操作能够高效完成，仅需少量代码即可实现复杂的数据持久化逻辑，大大提升了开发效率。Netty 作为高性能网络框架，在服务端网络通信方面表现卓越。它基于异步事件驱动模型，能够轻松处理大量客户端并发连接，确保员工信息在客户端与服务端之间快速、稳定地传输。在处理员工信息登记请求时，Netty 能够迅速接收来自 Qt 客户端的数据，并高效地分发给相应的业务处理模块，有效避免了线程阻塞，提高了系统的响应速度与吞吐量。Qt 客户端则利用其跨平台特性，保证了系统可在不同操作系统环境下运行，方便企业员工在多种设备上使用。其直观的图形界面设计，通过丰富的 UI 组件构建出简洁易用的员工信息登记与管理界面，为用户提供了良好的操作体验，如员工信息录入表单的便捷设计、员工信息列表的清晰展示等，都极大地提升了系统的可用性。 功能实现方面，系统涵盖了员工信息登记、信息查询、信息修改以及数据管理等核心功能。员工在 Qt 客户端填写个人信息后，点击提交，数据经 Netty 传输至服务端，由 Spring 框架进行业务逻辑处理与数据存储，最终成功保存至 MySQL 数据库，实现了信息登记功能的完整性与准确性。管理员可通过客户端输入查询条件，服务端根据条件从数据库检索数据并返回给客户端展示，方便快捷地实现员工信息查询功能，便于企业对员工信息的快速检索与统计分析。当员工信息需要变更时，修改功能确保了信息的实时更新与同步，保证了数据的一致性与时效性。</p>
+<p>​	尽管系统已基本实现预期功能，但开发过程中也暴露出一些不足之处。由于对部分技术细节掌握不够深入，在 Spring 与 Netty 的整合过程中遇到了一些配置与通信协调方面的问题，导致开发进度一度受阻，后期通过查阅大量资料与反复调试才得以解决。</p>
+<p>​	综上所述，通过本次期末大作业开发企业员工登记管理系统，深入学习并实践了 Spring、Netty、Qt 与 MySQL 等多种技术的综合应用，积累了丰富的软件开发经验，提升了自身的编程能力与系统设计思维。在未来的学习与实践中，将针对本次开发过程中发现的问题不断深入研究与改进，进一步提升系统的性能与用户体验，为今后的工作奠定更为坚实的基础。</p>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">Yolo</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://homeryland.cn/2025/01/07/%E4%BC%81%E4%B8%9A%E5%91%98%E5%B7%A5%E7%99%BB%E8%AE%B0%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%EF%BC%88QT-Netty%E5%BC%80%E5%8F%91%EF%BC%89/">https://homeryland.cn/2025/01/07/%E4%BC%81%E4%B8%9A%E5%91%98%E5%B7%A5%E7%99%BB%E8%AE%B0%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%EF%BC%88QT-Netty%E5%BC%80%E5%8F%91%EF%BC%89/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">Yolo</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/Socket/">
+                                    <span class="chip bg-color">Socket</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">感谢打赏</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.jpg" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+        <style>
+    .valine-card {
+        margin: 1.5rem auto;
+    }
+
+    .valine-card .card-content {
+        padding: 20px 20px 5px 20px;
+    }
+
+    #vcomments textarea {
+        box-sizing: border-box;
+        background: url("/medias/comment_bg.png") 100% 100% no-repeat;
+    }
+
+    #vcomments p {
+        margin: 2px 2px 10px;
+        font-size: 1.05rem;
+        line-height: 1.78rem;
+    }
+
+    #vcomments blockquote p {
+        text-indent: 0.2rem;
+    }
+
+    #vcomments a {
+        padding: 0 2px;
+        color: #4cbf30;
+        font-weight: 500;
+        text-decoration: none;
+    }
+
+    #vcomments img {
+        max-width: 100%;
+        height: auto;
+        cursor: pointer;
+    }
+
+    #vcomments ol li {
+        list-style-type: decimal;
+    }
+
+    #vcomments ol,
+    ul {
+        display: block;
+        padding-left: 2em;
+        word-spacing: 0.05rem;
+    }
+
+    #vcomments ul li,
+    ol li {
+        display: list-item;
+        line-height: 1.8rem;
+        font-size: 1rem;
+    }
+
+    #vcomments ul li {
+        list-style-type: disc;
+    }
+
+    #vcomments ul ul li {
+        list-style-type: circle;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    #vcomments table, th, td {
+        border: 0;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments h1 {
+        font-size: 1.85rem;
+        font-weight: bold;
+        line-height: 2.2rem;
+    }
+
+    #vcomments h2 {
+        font-size: 1.65rem;
+        font-weight: bold;
+        line-height: 1.9rem;
+    }
+
+    #vcomments h3 {
+        font-size: 1.45rem;
+        font-weight: bold;
+        line-height: 1.7rem;
+    }
+
+    #vcomments h4 {
+        font-size: 1.25rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    #vcomments h5 {
+        font-size: 1.1rem;
+        font-weight: bold;
+        line-height: 1.4rem;
+    }
+
+    #vcomments h6 {
+        font-size: 1rem;
+        line-height: 1.3rem;
+    }
+
+    #vcomments p {
+        font-size: 1rem;
+        line-height: 1.5rem;
+    }
+
+    #vcomments hr {
+        margin: 12px 0;
+        border: 0;
+        border-top: 1px solid #ccc;
+    }
+
+    #vcomments blockquote {
+        margin: 15px 0;
+        border-left: 5px solid #42b983;
+        padding: 1rem 0.8rem 0.3rem 0.8rem;
+        color: #666;
+        background-color: rgba(66, 185, 131, .1);
+    }
+
+    #vcomments pre {
+        font-family: monospace, monospace;
+        padding: 1.2em;
+        margin: .5em 0;
+        background: #272822;
+        overflow: auto;
+        border-radius: 0.3em;
+        tab-size: 4;
+    }
+
+    #vcomments code {
+        font-family: monospace, monospace;
+        padding: 1px 3px;
+        font-size: 0.92rem;
+        color: #e96900;
+        background-color: #f8f8f8;
+        border-radius: 2px;
+    }
+
+    #vcomments pre code {
+        font-family: monospace, monospace;
+        padding: 0;
+        color: #e8eaf6;
+        background-color: #272822;
+    }
+
+    #vcomments pre[class*="language-"] {
+        padding: 1.2em;
+        margin: .5em 0;
+    }
+
+    #vcomments code[class*="language-"],
+    pre[class*="language-"] {
+        color: #e8eaf6;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+
+    #vcomments b,
+    strong {
+        font-weight: bold;
+    }
+
+    #vcomments dfn {
+        font-style: italic;
+    }
+
+    #vcomments small {
+        font-size: 85%;
+    }
+
+    #vcomments cite {
+        font-style: normal;
+    }
+
+    #vcomments mark {
+        background-color: #fcf8e3;
+        padding: .2em;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+</style>
+
+<div class="card valine-card" data-aos="fade-up">
+    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; padding-left: 20px; top: 15px; padding-bottom: 5px;">
+        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+        <span>评论</span>
+    </div>
+    <div id="vcomments" class="card-content" style="display: grid">
+    </div>
+</div>
+
+<script src="/libs/valine/av-min.js"></script>
+<script src="/libs/valine/Valine.min.js"></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        appId: 'gOywyl0R9LxxdE93gftpTjG9-gzGzoHsz',
+        appKey: 'xVJSnETyvvLZBUaSbHYauYWp',
+        notify: 'false' === 'true',
+        verify: 'false' === 'true',
+        visitor: 'true' === 'true',
+        avatar: 'mm',
+        pageSize: '10',
+        lang: 'zh-cn',
+        placeholder: 'just go go'
+    });
+</script>
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
+            <div class="card">
+                <a href="/2025/01/07/%E4%BC%81%E4%B8%9A%E5%91%98%E5%B7%A5%E7%99%BB%E8%AE%B0%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%EF%BC%88QT-Netty%E5%BC%80%E5%8F%91%EF%BC%89/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/14.jpg" class="responsive-img" alt="企业员工登记管理系统（QT+Netty开发）">
+                        
+                        <span class="card-title">企业员工登记管理系统（QT+Netty开发）</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            基于Spring+Netty+Qt 存储数据搭建企业员工登记管理系统
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2025-01-07
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            Yolo
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Socket/">
+                        <span class="chip bg-color">Socket</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2024/10/07/%E5%AE%8C%E6%88%90%E7%AB%AF%E5%8F%A3%E6%A8%A1%E5%9E%8B/">
+                    <div class="card-image">
+                        
+                        <img src="https://s2.loli.net/2024/10/07/aSXbU8olpMviZwG.jpg" class="responsive-img" alt="I/O完成端口模型">
+                        
+                        <span class="card-title">I/O完成端口模型</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            基于IOCP模型编写可伸缩网络通信服务器程序.
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2024-10-07
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            Yolo
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">
+                        <span class="chip bg-color">计算机网络</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('8'),
+            headingSelector: 'h1, h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h1, h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+    <div class="container row center-align" style="margin-bottom: 15px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2024-2025</span>
+            
+            <span id="year">2024</span>
+            <a href="/about" target="_blank">Yolo</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                class="white-color">79.9k</span>&nbsp;字
+            
+            
+            
+            <br>
+            
+            <span id="sitetime">载入运行时间...</span>
+            <script>
+                function siteTime() {
+                    var seconds = 1000;
+                    var minutes = seconds * 60;
+                    var hours = minutes * 60;
+                    var days = hours * 24;
+                    var years = days * 365;
+                    var today = new Date();
+                    var startYear = "2024";
+                    var startMonth = "5";
+                    var startDate = "11";
+                    var startHour = "0";
+                    var startMinute = "0";
+                    var startSecond = "0";
+                    var todayYear = today.getFullYear();
+                    var todayMonth = today.getMonth() + 1;
+                    var todayDate = today.getDate();
+                    var todayHour = today.getHours();
+                    var todayMinute = today.getMinutes();
+                    var todaySecond = today.getSeconds();
+                    var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                    var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                    var diff = t2 - t1;
+                    var diffYears = Math.floor(diff / years);
+                    var diffDays = Math.floor((diff / days) - diffYears * 365);
+                    var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+                    var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
+                        minutes);
+                    var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours -
+                        diffMinutes * minutes) / seconds);
+                    if (startYear == todayYear) {
+                        document.getElementById("year").innerHTML = todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffDays + " 天 " + diffHours +
+                            " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    } else {
+                        document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffYears + " 年 " + diffDays +
+                            " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    }
+                }
+                setInterval(siteTime, 1000);
+            </script>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link ">
+    <a href="https://github.com/zw0927/zw0927.github.io" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:2946473607@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=2946473607" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 2946473607" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+    <a href="weixin://contacts/profile/Zw18502786548" class="tooltipped" target="_blank" data-tooltip="微信联系我: Zw18502786548" data-position="top" data-delay="50">
+        <i class="fab fa-weixin"></i>
+    </a>
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+
+    
+
+    
+
+	
+    
+
+    
+    
+    <script type="text/javascript" size="150" alpha='0.6'
+        zIndex="-1" src="/libs/background/ribbon-refresh.min.js" async="async"></script>
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>
